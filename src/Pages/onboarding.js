@@ -157,13 +157,13 @@ const OnboardingPage = () => {
   const createTeacherUserAccount = async () => {
     // get input
     const teacher_name = document.getElementById('name').value;
-    const pre_lang_parent = document.getElementById('yelpRestaurantID').value;
+    const pre_lang_teacher = document.getElementById('yelpRestaurantID').value;
     const classroom_grade_level = document.getElementById('education').value;
     const classroom_id = document.getElementById('classroom_id').value;
     const teacher_phone = document.getElementById('teach_phone').value;
 
     // send to database, wait until db responds before continueing
-    await fetch(`/createAccount?zipcode=${zipcode}&yelpID=${yelpID}&username=${username}`, {
+    await fetch(`/createAccount?teacher_name=${teacher_name}&pre_lang_teacher=${pre_lang_teacher}&class_grade_lvl=${classroom_grade_level}&classroom_id=${classroom_id}&teacher_phone=${teacher_phone}`, {
       method: 'POST',
     })
       .then((response) => response.json())
@@ -281,12 +281,14 @@ const OnboardingPage = () => {
 
   const createParentUserAccount = async () => {
     // get input
-    const yelpID = document.getElementById('yelpRestaurantID').value;
-    const zipcode = document.getElementById('zipCodeInput').value;
-    const username = document.getElementById('merchantUserName').value;
+    const name = document.getElementById('name').value;
+    const child_name = document.getElementById('child_name').value;
+    const understanding = document.getElementById('understanding').value;
+    const parent_phone = document.getElementById('parent_phone').value;
+    const parent_pref_lang = document.getElementById('parent_pref_lang').value;
 
     // send to database, wait until db responds before continueing
-    await fetch(`/createAccount?zipcode=${zipcode}&yelpID=${yelpID}&username=${username}`, {
+    await fetch(`/createAccount?name=${name}&child_name=${child_name}&understanding=${understanding}&parent_phone=${parent_phone}&parent_pref_lang=${parent_pref_lang}`, {
       method: 'POST',
     })
       .then((response) => response.json())
@@ -307,7 +309,9 @@ const OnboardingPage = () => {
     return (
       <>
         <div>Your Name:</div>
-        <input type="text" placeholder="name" id="name" maxLength={20} />
+        <input type="text" placeholder="name" id="name" maxLength={50} />
+        <div>Name of Your Child:</div>
+        <input type="text" placeholder="child_name" id="child_name" maxLength={50} />
         <div>Choose Your Understanding Level of AI:</div>
         <select data-placeholder="Choose a Experience Level:" id="education">
           <option>Little to None</option>
@@ -315,12 +319,10 @@ const OnboardingPage = () => {
           <option>Moderate</option>
           <option>Advanced</option>
         </select>
-        <div>Classroom Code (This Will Be Given to You Buy Your Teacher to Join Their Class):</div>
-        <input type="text" placeholder="classroom_id" id="classroom_id" maxLength={100} />
         <div>Your Phone Number: (Do not Include Dashes)</div>
-        <input type="text" placeholder="teach_phone" id="teach_phone" maxLength={10} />
+        <input type="text" placeholder="parent_phone" id="parent_phone" maxLength={10} />
         <div>Your Preferred Language for Communications:</div>
-        <select data-placeholder="Choose a Language..." id="teach_pref_lang">
+        <select data-placeholder="Choose a Language..." id="parent_pref_lang">
           <option value="Afrikaans">Afrikaans</option>
           <option value="Albanian">Albanian</option>
           <option value="Arabic">Arabic</option>
