@@ -1,10 +1,11 @@
-import logo from './logo.svg';
+/* eslint-disable react/prefer-stateless-function */
 import './App.css';
-import {useState, useRef} from 'react';
+import React from 'react';
 
-
-function App() {
-  // TODO: Implement your main page as a React component.
+class App extends React.Component {
+  render() {
+    return (<div />);
+  }
 }
 
 export default App;
