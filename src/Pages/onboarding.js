@@ -32,7 +32,7 @@ const OnboardingPage = () => {
     const parent_pref_lang = document.getElementById('parent_pref_lang').value;
 
     // send to database, wait until db responds before continueing
-    await fetch(`/createAccount?name=${name}&education=${education}&classroom_id=${classroom_id}&parent_name=${parent_name}&parent_email=${parent_email}&parent_phone=${parent_phone}&parent_pref_lang=${parent_pref_lang}`, {
+    await fetch(`/createAccountStudent?name=${name}&education=${education}&classroom_id=${classroom_id}&parent_name=${parent_name}&parent_email=${parent_email}&parent_phone=${parent_phone}&parent_pref_lang=${parent_pref_lang}`, {
       method: 'POST',
     })
       .then((response) => response.json())
@@ -163,7 +163,7 @@ const OnboardingPage = () => {
     const teacher_phone = document.getElementById('teach_phone').value;
 
     // send to database, wait until db responds before continueing
-    await fetch(`/createAccount?teacher_name=${teacher_name}&pre_lang_teacher=${pre_lang_teacher}&class_grade_lvl=${classroom_grade_level}&classroom_id=${classroom_id}&teacher_phone=${teacher_phone}`, {
+    await fetch(`/createAccountTeacher?teacher_name=${teacher_name}&pre_lang_teacher=${pre_lang_teacher}&class_grade_lvl=${classroom_grade_level}&classroom_id=${classroom_id}&teacher_phone=${teacher_phone}`, {
       method: 'POST',
     })
       .then((response) => response.json())
@@ -288,7 +288,7 @@ const OnboardingPage = () => {
     const parent_pref_lang = document.getElementById('parent_pref_lang').value;
 
     // send to database, wait until db responds before continueing
-    await fetch(`/createAccount?name=${name}&child_name=${child_name}&understanding=${understanding}&parent_phone=${parent_phone}&parent_pref_lang=${parent_pref_lang}`, {
+    await fetch(`/createAccountParent?name=${name}&child_name=${child_name}&understanding=${understanding}&parent_phone=${parent_phone}&parent_pref_lang=${parent_pref_lang}`, {
       method: 'POST',
     })
       .then((response) => response.json())

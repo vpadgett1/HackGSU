@@ -28,14 +28,14 @@ class parent_users(db.Model):
     parent_email = db.Column(db.String(100), nullable=False)
     parent_phone = db.Column(db.String(10), nullable=False)
     pre_lang_parent = db.Column(db.String(50),  nullable=False)
-    education_level = db.Column(db.String(50))
+    understanding_level = db.Column(db.String(50))
     child = db.Column(db.Integer, db.ForeignKey("student_users.name", ondelete="CASCADE"))
 
 class teacher_users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     teacher_name = db.Column(db.String(100), nullable=False)
     teacher_email = db.Column(db.String(100), nullable=False)
-    pre_lang_parent = db.Column(db.String(100))
+    pre_lang_teacher = db.Column(db.String(100))
     classroom_grade_level = db.Column(db.String(100), nullable=False)
     teacher_phone = db.Column(db.String(10), nullable=False)
     classroom_id = db.Column(db.String(50), db.ForeignKey("parent_users.id", ondelete="CASCADE"))
