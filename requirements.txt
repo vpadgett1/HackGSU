@@ -1,1 +1,6 @@
-flask
+Flask
+python-dotenv
+requests
+flask_sqlalchemy
+flask_login
+psycopg2-binary
