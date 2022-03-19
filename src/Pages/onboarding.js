@@ -283,12 +283,16 @@ const OnboardingPage = () => {
     // get input
     const name = document.getElementById('name').value;
     const child_name = document.getElementById('child_name').value;
-    const understanding = document.getElementById('understanding').value;
+    //const understanding = document.getElementById('understanding').value;
     const parent_phone = document.getElementById('parent_phone').value;
-    const parent_pref_lang = document.getElementById('parent_pref_lang').value;
-
+    //var parent_pref_lang = document.getElementById('parent_pref_lang').value;
+    //var parent_pref_lang_text = parent_pref_lang.options[parent_pref_lang.selectedIndex].text;
+    //var understanding = document.getElementById("understanding");
+    //var understanding_text = understanding.options[understanding.selectedIndex].text;
+    var e = document.getElementById("understanding");
+    var understanding_text = e.options[e.selectedIndex].text;
     // send to database, wait until db responds before continueing
-    await fetch(`/createAccountParent?name=${name}&child_name=${child_name}&understanding=${understanding}&parent_phone=${parent_phone}&parent_pref_lang=${parent_pref_lang}`, {
+    await fetch(`/createAccountParent?name=${name}&child_name=${child_name}&understanding=${understanding_text}&parent_phone=${parent_phone}`, {
       method: 'POST',
     })
       .then((response) => response.json())
@@ -313,7 +317,7 @@ const OnboardingPage = () => {
         <div>Name of Your Child:</div>
         <input type="text" placeholder="child_name" id="child_name" maxLength={50} />
         <div>Choose Your Understanding Level of AI:</div>
-        <select data-placeholder="Choose a Experience Level:" id="education">
+        <select data-placeholder="Choose a Experience Level:" id="understanding" name="understanding">
           <option>Little to None</option>
           <option>Beginner</option>
           <option>Moderate</option>

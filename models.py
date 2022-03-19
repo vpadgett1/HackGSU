@@ -22,7 +22,7 @@ class student_users(UserMixin, db.Model):
     )
 
 
-class parent_users(db.Model):
+class parent_users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     parent_name = db.Column(db.String(100), nullable=False)
     parent_email = db.Column(db.String(100), nullable=False)
@@ -31,7 +31,7 @@ class parent_users(db.Model):
     understanding_level = db.Column(db.String(50))
     child = db.Column(db.Integer, db.ForeignKey("student_users.name", ondelete="CASCADE"))
 
-class teacher_users(db.Model):
+class teacher_users(USerMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     teacher_name = db.Column(db.String(100), nullable=False)
     teacher_email = db.Column(db.String(100), nullable=False)
@@ -46,3 +46,5 @@ class create_friend(db.Model):
     starting_ai_knowledge = dbColumn()
     student = db.Column(db.Integer, db.ForeignKey("student_users.id", ondelete="CASCADE"))
 
+class notifications(db.Model):
+    
