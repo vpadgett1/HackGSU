@@ -23,11 +23,16 @@ const OnboardingPage = () => {
 
   const createStudentUserAccount = async () => {
     // get input
-    const zipcode = document.getElementById('zipCodeInput').value;
-    const username = document.getElementById('regularUserName').value;
+    const name = document.getElementById('name').value;
+    const education = document.getElementById('education').value;
+    const classroom_id = document.getElementById('classroom_id').value;
+    const parent_name = document.getElementById('parent_name').value;
+    const parent_email = document.getElementById('parent_email').value;
+    const parent_phone = document.getElementById('parent_phone').value;
+    const parent_pref_lang = document.getElementById('parent_pref_lang').value;
 
     // send to database, wait until db responds before continueing
-    await fetch(`/createAccount?name=${name}&education=${education}&class=${class}`, {
+    await fetch(`/createAccount?name=${name}&education=${education}&classroom_id=${classroom_id}&parent_name=${parent_name}&parent_email=${parent_email}&parent_phone=${parent_phone}&parent_pref_lang=${parent_pref_lang}`, {
       method: 'POST',
     })
       .then((response) => response.json())
@@ -49,7 +54,7 @@ const OnboardingPage = () => {
     return (
       <>
         <div>Your Name:</div>
-        <input type="text" placeholder="Name" id="Name" maxLength={20} />
+        <input type="text" placeholder="name" id="name" maxLength={20} />
         <div>Education Level:</div>
         <select data-placeholder="Choose a Grade Level:">
           <option>Kindergarden</option>
@@ -59,18 +64,16 @@ const OnboardingPage = () => {
           <option>4th Grade</option>
           <option>5th Grade</option>
         </select>
-        <div>Class:</div>
-        <input type="text" placeholder="class" id="class" maxLength={100} />
-        <div>Teacher Name:</div>
-        <input type="text" placeholder="teacher_name" id="teacher_name" maxLength={100} />
-        <div>Teacher Email:</div>
-        <input type="text" placeholder="teacher_email" id="teacher_email" maxLength={100} />
+        <div>Classroom Code (This Will Be Given to You Buy Your Teacher to Join Their Class):</div>
+        <input type="text" placeholder="classroom_id" id="classroom_id" maxLength={100} />
         <div>Parent Name:</div>
         <input type="text" placeholder="parent_name" id="parent_name" maxLength={100} />
         <div>Parent Email:</div>
         <input type="text" placeholder="parent_email" id="parent_email" maxLength={100} />
+        <div>Parent Phone Number (Do Not Include Dashes):</div>
+        <input type="text" placeholder="parent_phone" id="parent_phone" maxLength={10} />
         <div>Parent's Preferred Language:</div>
-        <select data-placeholder="Choose a Language...">
+        <select data-placeholder="Choose a Language..." id="parent_pref_lang">
           <option value="Afrikaans">Afrikaans</option>
           <option value="Albanian">Albanian</option>
           <option value="Arabic">Arabic</option>

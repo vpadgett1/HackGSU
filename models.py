@@ -9,11 +9,9 @@ class student_users(UserMixin, db.Model):
     name = db.Column(db.String(100), nullable=False)
     education_level = db.Column()  #drop down element - need to store
     student_email = db.Column(db.String(100), nullable=False)
-    student_class = db.Column()
-    teacher_id = #How do we accomplish on the teachers end multiple student relations?
-    teacher_name = db.Column(db.String(100))
-    teacher_email =db.Column(db.String(100))
-    pre_lang_teacher = #using JS elements and forms elements we can set this to be a dropdown but how does that data get sent to store?
+    student_class = db.relationship(
+        "teacher_users", backref="student_users", lazy=True, passive_deletes=True
+    )
     parent_id = db.Column(db.Integer, db.ForeignKey("parent_users.id", ondelete="CASCADE"))
     parent_name = db.Column(db.String(100))
     parent_email = db.Column(db.String(100))
@@ -35,13 +33,11 @@ class parent_users(db.Model):
 
 class teacher_users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    parent_name = db.Column(db.String(100), nullable=False)
-    parent_email = db.Column(db.String(100), nullable=False)
-    pre_lang_parent =  
-    education_level = 
-    student = db.relationship(
-        "student_users", backref="parent_users", lazy=True, passive_deletes=True
-    )
+    teacher_name = db.Column(db.String(100), nullable=False)
+    teacher_email = db.Column(db.String(100), nullable=False)
+    pre_lang_parent = db.Column(db.String(100))
+    classroom_grade_level = db.Column(db.String(100), nullable=False)
+    classroom_id = db.Column(db.String(50), db.ForeignKey("parent_users.id", ondelete="CASCADE"))
 
 class create_friend(db.Model):
     id = db.Column(db.Integer, primary_key=True)
