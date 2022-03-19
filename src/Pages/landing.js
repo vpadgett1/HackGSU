@@ -1,5 +1,4 @@
 import '../App.css';
-import '../styling/LandingPage.css';
 import React, {
 } from 'react';
 
