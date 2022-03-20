@@ -23,7 +23,7 @@ function Navigation() {
         const url = currentUserType;
         const fetchData = async () => {
           try {
-            const response = await fetch(url, {method: "POST",});
+            const response = await fetch(url, {method: "GET",});
             const json = await response.json();
             console.log("Error from server"+json);
           } catch (error) {
@@ -37,9 +37,9 @@ function Navigation() {
 
     return (
         <>
-        <Navbar bg="navbar" variant="dark">
+        <Navbar bg="navbar" variant="dark" className="p-0">
         <Container className="p-0">
-          <Navbar.Brand href="#home">Ai-Like</Navbar.Brand>
+          <Navbar.Brand href="#home"  className="ps-3 pt-2"><h3>Ai-Like</h3></Navbar.Brand>
           <Nav className="justify-content-end p-0">
             {/*<Nav.Link href="#loginStudent">Student Login/Signup</Nav.Link>*/}
             {/*<Nav.Link href="#loginParent">Parent Login/Signup</Nav.Link>*/}
