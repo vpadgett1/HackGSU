@@ -1,6 +1,8 @@
 import '../module1pages/module1styling/style.css';
 function Module1Page3 () {
-
+  function movePage(){
+    return window.location.href='/module1_pg4';
+  }
   return (
     <div>
       <div>
@@ -15,6 +17,8 @@ function Module1Page3 () {
 </p></li>
       </ul>
       </div>
+      <br/>
+      <button type="submit" onClick={movePage}>Continue</button>
     </div>
   );
 }
