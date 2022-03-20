@@ -11,8 +11,9 @@ const HomePage = () => (
     <div className="HomePage">
         <div className="HomepagePageInfo">
             <div className = "cardgroup">
+                <CardGroup>
                     <Card border="secondary" style={{ width: '18rem' }}>
-                        <Card.Img variant="top" src={ai_image} style={{width: '18em', height: '15em'}} />
+                        <Card.Img variant="top" src={ai_image} style={{width: '18rem', height: '18rem', margin:'auto'}}/>
                         <Card.Body> 
                             <Card.Header>Module #1</Card.Header>
                             <Card.Title>What is Artifical Intellegence?</Card.Title>
@@ -24,7 +25,7 @@ const HomePage = () => (
                     </Card>
 
                     <Card border="secondary" style={{ width: '18rem' }}>
-                        <Card.Img variant="top" src={brain} style={{width: '18em', height: '15em'}} />
+                        <Card.Img variant="top" src={brain} style={{height: '18rem', margin:'auto'}}/>
                         <Card.Body> 
                             <Card.Header>Module #2</Card.Header>
                             <Card.Title>Let's See a Visual Example</Card.Title>
@@ -34,6 +35,7 @@ const HomePage = () => (
                             <Card.Link href="/module2-page1">Click Here to Begin Learning!</Card.Link>
                         </Card.Body>
                     </Card>
+                </CardGroup>
             </div>
         </div>
     </div>
