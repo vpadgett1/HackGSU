@@ -6,7 +6,7 @@ from dotenv import load_dotenv, find_dotenv
 from flask_mail import Mail, Connection, Attachment
 from config import ADMINS
 import config as ADMIN
-import smtplib
+import smtplib, imaplib, email
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
@@ -16,43 +16,18 @@ from email.mime.multipart import MIMEMultipart
 
 load_dotenv(find_dotenv())
 
-app = flask.Flask(__name__)
-# Setup Mail
-mail_ = Mail(app)
-
-
-def send_email(subject, sender, recipients, text_body, html_body):
-    with app.app_context():
-        try:
-            msg = Message(subject, sender=sender, recipients=['jarrywc@gmail.com'])
-            # attach = Attachment()
-            msg.body = text_body
-            msg.html = html_body
-
-            mail_.send(msg)
-        except ConnectionRefusedError:
-            print(f'Connection Refused: {ConnectionRefusedError.strerror}')
-    return msg
-
-
-# msg = send_email('Hi', sender=ADMINS[0], recipients=ADMINS, text_body='Hi', html_body='<b>HTML</b> body')
-
-# print(f'{msg.subject}')
-
-
-import imaplib
-import email
-
-host = ADMIN.MAIL_SERVER
+host = 'premium5.web-hosting.com',
 username = os.getenv('MAIL_USERNAME')
 password =os.getenv('MAIL_PASSWORD')
 
 
 def get_inbox():
-    mail = imaplib.IMAP4_SSL(host)
+    mail = imaplib.IMAP4_SSL('premium5.web-hosting.com')
     mail.login(username, password)
+    print(f"{mail.list()}")
+
     mail.select("inbox")
-    _, search_data = mail.search(None, 'UNSEEN')
+    _, search_data = mail.search(None, 'ALL')
     my_message = []
     for num in search_data[0].split():
         email_data = {}
@@ -85,9 +60,10 @@ def send_mail(text='Email Body', subject='Hello World', to_emails=None, html=Non
     '''
     assert isinstance(to_emails, list)
     msg = MIMEMultipart('alternative')
-    msg['From'] = from_email
+    msg['From'] = username
     msg['To'] = ", ".join(to_emails)
     msg['Subject'] = subject
+    msg['Disposition-Notification-To'] = username
     print(f'Subject: {subject}')
     txt_part = MIMEText(text, 'plain')
     msg.attach(txt_part)
@@ -102,15 +78,14 @@ def send_mail(text='Email Body', subject='Hello World', to_emails=None, html=Non
     server.ehlo()
     # server.starttls()
     server.login(username, password)
-    server.sendmail(from_email, to_emails, msg_str)
-    server.
+    server.sendmail(username, to_emails, msg_str)
     server.quit()
-    return
+    return server
 
 
 if __name__ == "__main__":
-    # my_inbox = get_inbox()
-    # print(my_inbox)
-    send_mail(to_emails=['jarrywc@gmail.com'])
+    my_inbox = get_inbox()
+    print(my_inbox)
+    server = send_mail(to_emails=['jarrywc@gmail.com'])
 
     print(f'{mail}')
