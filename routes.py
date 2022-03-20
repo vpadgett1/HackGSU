@@ -16,6 +16,8 @@ from flask_oauthlib.client import OAuth, OAuthException
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv, find_dotenv
 from werkzeug.security import generate_password_hash, check_password_hash
+from mail import send_mail
+from sms import send_message
 
 load_dotenv(find_dotenv())
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
@@ -564,7 +566,24 @@ def updateScore2():
     }
 
 
+@app.route("/mailer", methods=["POST"])
+def mailer():
+    email = flask.request.args.get('email')
+    score = flask.request.args.get('score')
+    quantity_questions = flask.request.args.get('num_of_questions')
+    body = f"Greetings!\nYou have a test score of {score} with {quantity_questions} questions.\n Keep up the hard work!\n\n-Ai-Like Team"
+    send_mail(text=body, subject='Test Scores', to_emails=[email], html=None)
+    return flask.jsonify({"status":"200"})
 
+
+@app.route("/sms", methods=["POST"])
+def mailer():
+    sms = flask.request.args.get('sms')
+    score = flask.request.args.get('score')
+    quantity_questions = flask.request.args.get('num_of_questions')
+    body = f"Greetings!\nYou have a test score of {score} with {quantity_questions} questions.\n Keep up the hard work!\n\n-Ai-Like Team"
+    send_message(body, sms)
+    return flask.jsonify({"status":"200"})
 
 # send manifest.json file
 @app.route("/manifest.json")
