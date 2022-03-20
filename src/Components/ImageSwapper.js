@@ -22,7 +22,7 @@ export default function ImageSwapper() {
     return (
         <Container className='mb-8' >
             <div className='container-fluid'>
-                <img src={currentImage} className='d-block w-80' />
+                <img src={currentImage} className='d-block w-100' />
             </div>
 
         </Container>

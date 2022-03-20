@@ -39,7 +39,9 @@ function Navigation() {
         <>
         <Navbar bg="navbar" variant="dark" className="p-0">
         <Container className="p-0">
-          <Navbar.Brand href="#home"  className="ps-3 pt-2"><h3>Ai-Like</h3></Navbar.Brand>
+          <Navbar.Brand href="#home"  className="ps-3 pt-2">
+              <h3>Ai-Like.me</h3>
+          </Navbar.Brand>
           <Nav className="justify-content-end p-0">
             {/*<Nav.Link href="#loginStudent">Student Login/Signup</Nav.Link>*/}
             {/*<Nav.Link href="#loginParent">Parent Login/Signup</Nav.Link>*/}
