@@ -14,11 +14,14 @@ import LandingPage from './Pages/landing';
 import OnboardingPage from './Pages/onboarding';
 import Navigation from './Components/Navigation';
 import './index.css';
+import {Container, Nav, Navbar, NavDropdown} from "react-bootstrap";
 
 ReactDOM.render(
   <React.StrictMode>
-      <Navigation />
+
     <Router>
+
+        <Navigation />
       <Routes>
         <Route exact path="/" element={<LandingPage />} />
         {/* <Route path="/createAccount" element={<CreateAccountPage />} /> */}

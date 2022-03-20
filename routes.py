@@ -15,6 +15,7 @@ import base64
 from flask_oauthlib.client import OAuth, OAuthException
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv, find_dotenv
+import mail
 
 
 load_dotenv(find_dotenv())
@@ -53,7 +54,7 @@ def get_google_oauth_token():
 
 @app.route("/loginStudent", methods=["POST"])
 def loginStudent_post():
-    return google.authorize(callback=flask.url_for("loginStudent/authorized", _external=True))
+    return google.authorize(callback=flask.url_for("authorized", _external=True))
 
 
 @app.route("/loginStudent/authorized")
@@ -99,7 +100,7 @@ def authorizedStudent():
 
 @app.route("/loginTeacher", methods=["POST"])
 def loginTeacher_post():
-    return google.authorize(callback=flask.url_for("loginTeacher/authorized", _external=True))
+    return google.authorize(callback=flask.url_for("authorized", _external=True))
 
 
 @app.route("/loginTeacher/authorized")
@@ -145,7 +146,7 @@ def authorizedTeacher():
 
 @app.route("/loginParent", methods=["POST"])
 def loginParent_post():
-    return google.authorize(callback=flask.url_for("/loginParent/authorized", _external=True))
+    return google.authorize(callback=flask.url_for("authorized", _external=True))
 
 
 @app.route("/loginParent/authorized")
