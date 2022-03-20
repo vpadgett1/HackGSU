@@ -24,12 +24,17 @@ const OnboardingPage = () => {
   const createStudentUserAccount = async () => {
     // get input
     const name = document.getElementById('name').value;
-    const education = document.getElementById('education').value;
+    //const education = document.getElementById('education').value;
     const classroom_id = document.getElementById('classroom_id').value;
     const parent_name = document.getElementById('parent_name').value;
     const parent_email = document.getElementById('parent_email').value;
     const parent_phone = document.getElementById('parent_phone').value;
-    const parent_pref_lang = document.getElementById('parent_pref_lang').value;
+    //const parent_pref_lang = document.getElementById('parent_pref_lang').value;
+
+    var edu = document.getElementById("edu_level");
+    var education = edu.options[edu.selectedIndex].text;
+    var lang = document.getElementById("parent_pref_lang");
+    var parent_pref_lang = lang.options[lang.selectedIndex].text;
 
     // send to database, wait until db responds before continueing
     await fetch(`/createAccountStudent?name=${name}&education=${education}&classroom_id=${classroom_id}&parent_name=${parent_name}&parent_email=${parent_email}&parent_phone=${parent_phone}&parent_pref_lang=${parent_pref_lang}`, {
@@ -56,7 +61,7 @@ const OnboardingPage = () => {
         <div>Your Name:</div>
         <input type="text" placeholder="name" id="name" maxLength={20} />
         <div>Education Level:</div>
-        <select data-placeholder="Choose a Grade Level:">
+        <select data-placeholder="Choose a Grade Level:" id="edu_level">
           <option>Kindergarden</option>
           <option>1st Grade</option>
           <option>2nd Grade</option>
@@ -157,11 +162,12 @@ const OnboardingPage = () => {
   const createTeacherUserAccount = async () => {
     // get input
     const teacher_name = document.getElementById('name').value;
-    const pre_lang_teacher = document.getElementById('yelpRestaurantID').value;
-    const classroom_grade_level = document.getElementById('education').value;
     const classroom_id = document.getElementById('classroom_id').value;
     const teacher_phone = document.getElementById('teach_phone').value;
-
+    var clss = document.getElementById("education");
+    var classroom_grade_level = clss.options[clss.selectedIndex].text;
+    var pre = document.getElementById("parent_pref_lang");
+    var pre_lang_teacher = pre.options[pre.selectedIndex].text;
     // send to database, wait until db responds before continueing
     await fetch(`/createAccountTeacher?teacher_name=${teacher_name}&pre_lang_teacher=${pre_lang_teacher}&class_grade_lvl=${classroom_grade_level}&classroom_id=${classroom_id}&teacher_phone=${teacher_phone}`, {
       method: 'POST',
@@ -283,23 +289,20 @@ const OnboardingPage = () => {
     // get input
     const name = document.getElementById('name').value;
     const child_name = document.getElementById('child_name').value;
-    //const understanding = document.getElementById('understanding').value;
     const parent_phone = document.getElementById('parent_phone').value;
-    //var parent_pref_lang = document.getElementById('parent_pref_lang').value;
-    //var parent_pref_lang_text = parent_pref_lang.options[parent_pref_lang.selectedIndex].text;
-    //var understanding = document.getElementById("understanding");
-    //var understanding_text = understanding.options[understanding.selectedIndex].text;
     var e = document.getElementById("understanding");
     var understanding_text = e.options[e.selectedIndex].text;
+    var k = document.getElementById("parent_pref_lang");
+    var lang_text = k.options[k.selectedIndex].text;
     // send to database, wait until db responds before continueing
-    await fetch(`/createAccountParent?name=${name}&child_name=${child_name}&understanding=${understanding_text}&parent_phone=${parent_phone}`, {
+    await fetch(`/createAccountParent?name=${name}&child_name=${child_name}&understanding=${understanding_text}&parent_phone=${parent_phone}&parent_pref_lang=${lang_text}`, {
       method: 'POST',
     })
       .then((response) => response.json())
       .then((result) => {
         if (result.status && result.status === 200) {
           if (result.newAccountCreated) {
-            navigate('/merchant');
+            navigate('/module');
           } else { // show alert
             setAlertMessage(result.message);
             setShowMessage(true);

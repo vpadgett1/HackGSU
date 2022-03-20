@@ -52,12 +52,12 @@ def get_google_oauth_token():
 
 
 @app.route("/loginStudent", methods=["POST"])
-def login_post():
-    return google.authorize(callback=flask.url_for("authorized", _external=True))
+def loginStudent_post():
+    return google.authorize(callback=flask.url_for("loginStudent/authorized", _external=True))
 
 
 @app.route("/loginStudent/authorized")
-def authorized():
+def authorizedStudent():
     resp = google.authorized_response()
     if resp is None:
         return "Access denied: reason=%s error=%s" % (
@@ -98,12 +98,12 @@ def authorized():
 
 
 @app.route("/loginTeacher", methods=["POST"])
-def login_post():
-    return google.authorize(callback=flask.url_for("authorized", _external=True))
+def loginTeacher_post():
+    return google.authorize(callback=flask.url_for("loginTeacher/authorized", _external=True))
 
 
 @app.route("/loginTeacher/authorized")
-def authorized():
+def authorizedTeacher():
     resp = google.authorized_response()
     if resp is None:
         return "Access denied: reason=%s error=%s" % (
@@ -144,12 +144,12 @@ def authorized():
 
 
 @app.route("/loginParent", methods=["POST"])
-def login_post():
-    return google.authorize(callback=flask.url_for("authorized", _external=True))
+def loginParent_post():
+    return google.authorize(callback=flask.url_for("/loginParent/authorized", _external=True))
 
 
 @app.route("/loginParent/authorized")
-def authorized():
+def authorizedParent():
     resp = google.authorized_response()
     if resp is None:
         return "Access denied: reason=%s error=%s" % (
@@ -195,7 +195,7 @@ def onboarding():
 
 @app.route("/createAccountStudent", methods=["POST"])
 @login_required
-def createAccount():
+def createAccountStudent():
     input_name = flask.request.args.get('name')
     input_education = flask.request.args.get('education')
     input_classroom_id = flask.request.args.get('classroom_id')
@@ -239,7 +239,7 @@ def createAccount():
 
 @app.route("/createAccountTeacher", methods=["POST"])
 @login_required
-def createAccount():
+def createAccountTeacher():
     input_teacher_name = flask.request.args.get('teacher_name')
     input_pre_lang_teacher = flask.request.args.get('pre_lang_teacher')
     input_classroom_grade_level = flask.request.args.get('classroom_grade_level')
@@ -278,7 +278,7 @@ def createAccount():
 
 @app.route("/createAccountParent", methods=["POST"])
 @login_required
-def createAccount():
+def createAccountParent():
     input_parent_name = flask.request.args.get('name')
     input_pre_lang_parent = flask.request.args.get('parent_pref_lang')
     input_understanding = flask.request.args.get('understanding')
@@ -289,9 +289,13 @@ def createAccount():
     current_user.pre_lang_parent = input_pre_lang_parent
     current_user.understanding_level = input_understanding
     current_user.parent_phone = input_parentr_phone
-    if(input_child_name != "" or input_child_name != None)
+    if(input_child_name != "" or input_child_name != None):
         current_user.child = input_child_name
-    db.session.commit()
+
+    print(input_parent_name)
+    print(input_understanding)
+    print(input_pre_lang_parent)
+    #db.session.commit()
 
     status = 400
     newAccountCreated = False
@@ -335,5 +339,5 @@ def main():
 
 if __name__ == "__main__":
     app.run(
-        host=os.getenv("IP", "0.0.0.0"), port=int(os.getenv("PORT", 5000)), debug=True
+        host=os.getenv("IP", "0.0.0.0"), port=int(os.getenv("PORT", 8000)), debug=True
     )
