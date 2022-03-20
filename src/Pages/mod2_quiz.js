@@ -69,6 +69,19 @@ export default function App() {
 			setShowScore(true);
 		}
 	};
+
+    const transferScoretoDB = async () => {
+        await fetch(`/updateAssessmentScore?score=${score}`, {
+            method: 'POST',
+          })
+            .then((response) => response.json())
+            .then((result) => {
+              
+              }
+            })
+            .catch((response) => console.log(response));
+    }
+
 	return (
 		<div className='app'>
 			{showScore ? (
