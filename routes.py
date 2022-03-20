@@ -28,7 +28,12 @@ login_manager.init_app(app)
 
 @login_manager.user_loader
 def load_user(user_name):
-    return user.query.get(user_name)
+    if("/loginStudent"):
+        return student_users.query.get(user_name)
+    elif("/loginTeacher"):
+        return teacher_users.query.get(user_name)
+    else:
+        return parent_users.query.get(user_name)
 
 bp = flask.Blueprint("bp", __name__, template_folder="./build")
 
@@ -71,17 +76,17 @@ def authorizedStudent():
     else:
         return "User email not available or not verified by Google.", 400
     # Create a user in our database with the information provided by the Google response json
-    newUser = user(student_email=users_email)
+    newUser = student_users(student_email=users_email)
 
     # Doesn't exist? Add it to the database.
     previousUser = True
-    if not user.query.filter_by(student_email=users_email).first():
+    if not student_users.query.filter_by(student_email=users_email).first():
         db.session.add(newUser)
         db.session.commit()
         previousUser = False
 
     # Begin user session by logging the user in
-    login_user(user.query.filter_by(student_email=users_email).first())
+    login_user(student_users.query.filter_by(student_email=users_email).first())
 
     # if user already exists, send straight to their home page
     if previousUser:
@@ -117,17 +122,17 @@ def authorizedTeacher():
     else:
         return "User email not available or not verified by Google.", 400
     # Create a user in our database with the information provided by the Google response json
-    newUser = user(teacher_email=users_email)
+    newUser = teacher_users(teacher_email=users_email)
 
     # Doesn't exist? Add it to the database.
     previousUser = True
-    if not user.query.filter_by(teacher_email=users_email).first():
+    if not teacher_users.query.filter_by(teacher_email=users_email).first():
         db.session.add(newUser)
         db.session.commit()
         previousUser = False
 
     # Begin user session by logging the user in
-    login_user(user.query.filter_by(teacher_email=users_email).first())
+    login_user(teacher_users.query.filter_by(teacher_email=users_email).first())
 
     # if user already exists, send straight to their home page
     if previousUser:
@@ -164,17 +169,17 @@ def authorizedParent():
     else:
         return "User email not available or not verified by Google.", 400
     # Create a user in our database with the information provided by the Google response json
-    newUser = user(parent_email=users_email)
+    newUser = parent_users(parent_email=users_email)
 
     # Doesn't exist? Add it to the database.
     previousUser = True
-    if not user.query.filter_by(parent_email=users_email).first():
+    if not parent_users.query.filter_by(parent_email=users_email).first():
         db.session.add(newUser)
         db.session.commit()
         previousUser = False
 
     # Begin user session by logging the user in
-    login_user(user.query.filter_by(parent_email=users_email).first())
+    login_user(parent_users.query.filter_by(parent_email=users_email).first())
 
     # if user already exists, send straight to their home page
     if previousUser:
@@ -217,11 +222,11 @@ def createAccountStudent():
     status = 400
     newAccountCreated = False
     message = "Failed account creation. Please refresh the page and try again."
-    if user.query.filter_by(
+    if student_users.query.filter_by(
         username=current_user.name, email=current_user.email
     ).first():
         if (
-            user.query.filter_by(
+            student_users.query.filter_by(
                 username=current_user.name, email=current_user.email
             )
             .first()
@@ -257,11 +262,11 @@ def createAccountTeacher():
     status = 400
     newAccountCreated = False
     message = "Failed account creation. Please refresh the page and try again."
-    if user.query.filter_by(
+    if teacher_users.query.filter_by(
         teacher_name=current_user.name, teacher_email=current_user.email
     ).first():
         if (
-            user.query.filter_by(
+            teacher_users.query.filter_by(
                 teacher_name=current_user.name, teacher_email=current_user.email
             )
             .first()
@@ -289,7 +294,7 @@ def createAccountParent():
     current_user.parent_name = input_parent_name
     current_user.pre_lang_parent = input_pre_lang_parent
     current_user.understanding_level = input_understanding
-    current_user.parent_phone = input_parentr_phone
+    current_user.parent_phone = input_parent_phone
     if(input_child_name != "" or input_child_name != None):
         current_user.child = input_child_name
     db.session.commit()
@@ -297,11 +302,11 @@ def createAccountParent():
     status = 400
     newAccountCreated = False
     message = "Failed account creation. Please refresh the page and try again."
-    if user.query.filter_by(
+    if parent_users.query.filter_by(
         name=current_user.name, parent_email=current_user.parent_email
     ).first():
         if (
-            user.query.filter_by(
+            parent_users.query.filter_by(
                 name=current_user.name, parent_email=current_user.parent_email
             )
             .first()
@@ -316,6 +321,10 @@ def createAccountParent():
         "newAccountCreated": newAccountCreated,
         "message": message,
     }
+
+@app.route("/homepage")
+def homepage():
+    return flask.render_template("./index.html")
 
 # send manifest.json file
 @app.route("/manifest.json")

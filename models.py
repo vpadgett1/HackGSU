@@ -48,4 +48,16 @@ class create_friend(db.Model):
     starting_ai_knowledge = db.Column(db.String(20))
     student = db.Column(db.Integer, db.ForeignKey("student_users.id", ondelete="CASCADE"))
 
-#class notifications(db.Model):
+class scores(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    parent = db.Column(db.Integer, db.ForeignKey("parent_users.id", ondelete="CASCADE"))
+    student = db.Column(db.Integer, db.ForeignKey("student_users.id", ondelete="CASCADE"))
+    assessment = db.Column(db.String(20), nullable=False)
+    score = db.Column(db.Integer, nullable=False)
+class notifications(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    type_sms = db.Column(db.Boolean, nullable=False)
+    sent = db.Column(db.DateTime, nullable=False)
+    confirmed = db.Column(db.DateTime, nullable=False)
+    parent = db.Column(db.Integer, db.ForeignKey("parent_users.id", ondelete="CASCADE"))
+    student = db.Column(db.Integer, db.ForeignKey("student_users.id", ondelete="CASCADE"))
