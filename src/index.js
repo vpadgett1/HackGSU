@@ -11,10 +11,19 @@ import {
 import reportWebVitals from './reportWebVitals';
 import LandingPage from './Pages/landing';
 //import CreateAccountPage from './Pages/CreateAccountPage';
+import Module1 from './Pages/module1'
+import Module2Page1 from './Pages/module2pages/page1';
+import Module2Page2 from './Pages/module2pages/page2';
+import Module2bird from './Pages/module2pages/bird';
+import Module2cat from './Pages/module2pages/cat';
+import Module2dog from './Pages/module2pages/dog';
+import Module2plane from './Pages/module2pages/plane';
 import OnboardingPage from './Pages/onboarding';
+import HomePage from './Pages/homepage';
 import Navigation from './Components/Navigation';
 import './index.css';
 import {Container, Nav, Navbar, NavDropdown} from "react-bootstrap";
+
 
 ReactDOM.render(
   <React.StrictMode>
@@ -24,8 +33,15 @@ ReactDOM.render(
         <Navigation />
       <Routes>
         <Route exact path="/" element={<LandingPage />} />
-        {/* <Route path="/createAccount" element={<CreateAccountPage />} /> */}
         <Route path="/onboarding" element={<OnboardingPage />} />
+        <Route path="/homepage" element={<HomePage />} />
+        <Route path="/module_1" element={<Module1 />} />
+        <Route exact path="/module2-page1" element={<Module2Page1 />} />
+        <Route exact path="/module2-page2" element={<Module2Page2 />} />
+        <Route exact path="/module2-bird" element={<Module2bird />} />
+        <Route exact path="/module2-cat" element={<Module2cat />} />
+        <Route exact path="/module2-dog" element={<Module2dog />} />
+        <Route exact path="/module2-plane" element={<Module2plane />} />
       </Routes>
     </Router>
   </React.StrictMode>,

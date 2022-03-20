@@ -29,7 +29,12 @@ login_manager.init_app(app)
 
 @login_manager.user_loader
 def load_user(user_name):
-    return user.query.get(user_name)
+    if("/loginStudent"):
+        return student_users.query.get(user_name)
+    elif("/loginTeacher"):
+        return teacher_users.query.get(user_name)
+    else:
+        return parent_users.query.get(user_name)
 
 bp = flask.Blueprint("bp", __name__, template_folder="./build")
 
@@ -54,7 +59,7 @@ def get_google_oauth_token():
 
 @app.route("/loginStudent", methods=["POST"])
 def loginStudent_post():
-    return google.authorize(callback=flask.url_for("authorized", _external=True))
+    return google.authorize(callback=flask.url_for("loginStudent/authorized", _external=True))
 
 
 @app.route("/loginStudent/authorized")
@@ -72,17 +77,17 @@ def authorizedStudent():
     else:
         return "User email not available or not verified by Google.", 400
     # Create a user in our database with the information provided by the Google response json
-    newUser = user(student_email=users_email)
+    newUser = student_users(student_email=users_email)
 
     # Doesn't exist? Add it to the database.
     previousUser = True
-    if not user.query.filter_by(student_email=users_email).first():
+    if not student_users.query.filter_by(student_email=users_email).first():
         db.session.add(newUser)
         db.session.commit()
         previousUser = False
 
     # Begin user session by logging the user in
-    login_user(user.query.filter_by(student_email=users_email).first())
+    login_user(student_users.query.filter_by(student_email=users_email).first())
 
     # if user already exists, send straight to their home page
     if previousUser:
@@ -92,7 +97,7 @@ def authorizedStudent():
         # if merchant user, send to merchant homepage
         # otherwise, regular
         else:
-            return flask.redirect(flask.url_for("module"))
+            return flask.redirect(flask.url_for("homepage"))
 
     # if not, send to onboarding
     return flask.redirect(flask.url_for("onboarding"))
@@ -146,6 +151,7 @@ def authorizedTeacher():
 
 @app.route("/loginParent", methods=["POST"])
 def loginParent_post():
+    print("hello darkness")
     return google.authorize(callback=flask.url_for("authorized", _external=True))
 
 
@@ -164,17 +170,17 @@ def authorizedParent():
     else:
         return "User email not available or not verified by Google.", 400
     # Create a user in our database with the information provided by the Google response json
-    newUser = user(parent_email=users_email)
+    newUser = parent_users(parent_email=users_email)
 
     # Doesn't exist? Add it to the database.
     previousUser = True
-    if not user.query.filter_by(parent_email=users_email).first():
+    if not parent_users.query.filter_by(parent_email=users_email).first():
         db.session.add(newUser)
         db.session.commit()
         previousUser = False
 
     # Begin user session by logging the user in
-    login_user(user.query.filter_by(parent_email=users_email).first())
+    login_user(parent_users.query.filter_by(parent_email=users_email).first())
 
     # if user already exists, send straight to their home page
     if previousUser:
@@ -184,7 +190,7 @@ def authorizedParent():
         # if merchant user, send to merchant homepage
         # otherwise, regular
         else:
-            return flask.redirect(flask.url_for("module"))
+            return flask.redirect(flask.url_for("homepage"))
 
     # if not, send to onboarding
     return flask.redirect(flask.url_for("onboarding"))
@@ -217,11 +223,11 @@ def createAccountStudent():
     status = 400
     newAccountCreated = False
     message = "Failed account creation. Please refresh the page and try again."
-    if user.query.filter_by(
+    if student_users.query.filter_by(
         username=current_user.name, email=current_user.email
     ).first():
         if (
-            user.query.filter_by(
+            student_users.query.filter_by(
                 username=current_user.name, email=current_user.email
             )
             .first()
@@ -257,11 +263,11 @@ def createAccountTeacher():
     status = 400
     newAccountCreated = False
     message = "Failed account creation. Please refresh the page and try again."
-    if user.query.filter_by(
+    if teacher_users.query.filter_by(
         teacher_name=current_user.name, teacher_email=current_user.email
     ).first():
         if (
-            user.query.filter_by(
+            teacher_users.query.filter_by(
                 teacher_name=current_user.name, teacher_email=current_user.email
             )
             .first()
@@ -289,7 +295,7 @@ def createAccountParent():
     current_user.parent_name = input_parent_name
     current_user.pre_lang_parent = input_pre_lang_parent
     current_user.understanding_level = input_understanding
-    current_user.parent_phone = input_parentr_phone
+    current_user.parent_phone = input_parent_phone
     if(input_child_name != "" or input_child_name != None):
         current_user.child = input_child_name
     db.session.commit()
@@ -297,11 +303,11 @@ def createAccountParent():
     status = 400
     newAccountCreated = False
     message = "Failed account creation. Please refresh the page and try again."
-    if user.query.filter_by(
+    if parent_users.query.filter_by(
         name=current_user.name, parent_email=current_user.parent_email
     ).first():
         if (
-            user.query.filter_by(
+            parent_users.query.filter_by(
                 name=current_user.name, parent_email=current_user.parent_email
             )
             .first()
@@ -317,24 +323,52 @@ def createAccountParent():
         "message": message,
     }
 
+@app.route("/homepage")
+def homepage():
+    return flask.render_template("./index.html")
+
+@app.route("/module_1")
+def module1page():
+    return flask.render_template("./index.html")
+
+@app.route("/module2-page1")
+def module2page1():
+    return flask.render_template("./index.html")
+
+@app.route("/module2-page2")
+def module2page2():
+    return flask.render_template("./index.html")
+
+@app.route("/module2-bird")
+def module2bird():
+    return flask.render_template("./index.html")
+
+@app.route("/module2-cat")
+def module2cat():
+    return flask.render_template("./index.html")
+
+@app.route("/module2-dog")
+def module2dog():
+    return flask.render_template("./index.html")
+
+@app.route("/module2-plane")
+def module2plane():
+    return flask.render_template("./index.html")
+
 # send manifest.json file
 @app.route("/manifest.json")
 def manifest():
     return flask.send_from_directory("./build", "manifest.json")
 
-
 @app.route("/")
 def main():
     if current_user.is_authenticated:
-        if current_user.name:
-            return flask.redirect(flask.url_for("module"))
-        else:
-            return flask.redirect(flask.url_for("onboarding"))
+            return flask.redirect(flask.url_for("homepage"))
     else:
         return flask.render_template("./index.html")
 
 
 if __name__ == "__main__":
     app.run(
-        host=os.getenv("IP", "0.0.0.0"), port=int(os.getenv("PORT", 8000)), debug=True
+        host=os.getenv("IP", "127.0.0.1"), port=int(os.getenv("PORT", 5000)), debug=True
     )

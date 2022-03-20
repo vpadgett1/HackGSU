@@ -49,7 +49,7 @@ const OnboardingPage = () => {
         // go to next page
         if (result.status && result.status === 200) {
           if (result.newAccountCreated) {
-            navigate('/module');
+            navigate('/homepage');
           } else { // show alert
             setAlertMessage(result.message);
             setShowMessage(true);
@@ -180,7 +180,7 @@ const OnboardingPage = () => {
       .then((result) => {
         if (result.status && result.status === 200) {
           if (result.newAccountCreated) {
-            navigate('/module');
+            navigate('/homepage');
           } else { // show alert
             setAlertMessage(result.message);
             setShowMessage(true);
@@ -306,7 +306,7 @@ const OnboardingPage = () => {
       .then((result) => {
         if (result.status && result.status === 200) {
           if (result.newAccountCreated) {
-            navigate('/module');
+            navigate('/homepage');
           } else { // show alert
             setAlertMessage(result.message);
             setShowMessage(true);
