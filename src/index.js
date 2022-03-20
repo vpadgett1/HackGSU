@@ -18,6 +18,8 @@ import Module2bird from './Pages/module2pages/bird';
 import Module2cat from './Pages/module2pages/cat';
 import Module2dog from './Pages/module2pages/dog';
 import Module2plane from './Pages/module2pages/plane';
+import Mod1Quiz from './Pages/mod1_quiz1';
+import Mod2Quiz from './Pages/mod2_quiz';
 import OnboardingPage from './Pages/onboarding';
 import HomePage from './Pages/homepage';
 import Navigation from './Components/Navigation';
@@ -42,6 +44,8 @@ ReactDOM.render(
         <Route exact path="/module2-cat" element={<Module2cat />} />
         <Route exact path="/module2-dog" element={<Module2dog />} />
         <Route exact path="/module2-plane" element={<Module2plane />} />
+        <Route path="/mod1quiz" element={<Mod1Quiz />} />
+        <Route path="/mod2quiz" element={<Mod2Quiz />} />
       </Routes>
     </Router>
   </React.StrictMode>,

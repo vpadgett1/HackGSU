@@ -71,20 +71,21 @@ export default function App() {
 	};
 
     const transferScoretoDB = async () => {
-        await fetch(`/updateAssessmentScore?score=${score}`, {
+        await fetch(`/updateAssessment2Score?score=${score}`, {
             method: 'POST',
           })
             .then((response) => response.json())
             .then((result) => {
-              
+                console.log("Successfully Recorded Score");
               }
-            })
+            )
             .catch((response) => console.log(response));
     }
 
 	return (
 		<div className='app'>
 			{showScore ? (
+                transferScoretoDB(),
 				<div className='score-section'>
 					You scored {score} out of {questions.length}
 				</div>
