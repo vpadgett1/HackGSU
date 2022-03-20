@@ -96,7 +96,7 @@ def authorizedStudent():
         # if merchant user, send to merchant homepage
         # otherwise, regular
         else:
-            return flask.redirect(flask.url_for("module"))
+            return flask.redirect(flask.url_for("homepage"))
 
     # if not, send to onboarding
     return flask.redirect(flask.url_for("onboarding"))
@@ -142,7 +142,7 @@ def authorizedTeacher():
         # if merchant user, send to merchant homepage
         # otherwise, regular
         else:
-            return flask.redirect(flask.url_for("module"))
+            return flask.redirect(flask.url_for("homepage"))
 
     # if not, send to onboarding
     return flask.redirect(flask.url_for("onboarding"))
@@ -189,7 +189,7 @@ def authorizedParent():
         # if merchant user, send to merchant homepage
         # otherwise, regular
         else:
-            return flask.redirect(flask.url_for("module"))
+            return flask.redirect(flask.url_for("homepage"))
 
     # if not, send to onboarding
     return flask.redirect(flask.url_for("onboarding"))
@@ -362,7 +362,7 @@ def manifest():
 @app.route("/")
 def main():
     if current_user.is_authenticated:
-            return flask.redirect(flask.url_for("module"))
+            return flask.redirect(flask.url_for("homepage"))
     else:
         return flask.render_template("./index.html")
 
