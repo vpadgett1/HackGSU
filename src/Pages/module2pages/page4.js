@@ -42,6 +42,10 @@ function Module2_page4 () {
         The top layers look more into things like regions of the image that might contain the features like whiskers of a cat, or teeth of a dog.
         </li>
 
+        <div>
+         <button onClick={ () =>  window.location.href='/mod2quiz'}> Click Here to Take The End of Module Assessment </button>
+        </div>
+
     </div>
   );
 }
