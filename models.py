@@ -4,6 +4,8 @@ from flask_login import UserMixin
 
 class student_users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(50), nullable=False)
+    password = db.Column(db.String(50), nullable=False)
     name = db.Column(db.String(100), nullable=False)
     education_level = db.Column(db.String(50))  #drop down element - need to store
     student_email = db.Column(db.String(100), nullable=False)
@@ -24,6 +26,8 @@ class student_users(UserMixin, db.Model):
 
 class parent_users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(50), nullable=False)
+    password = db.Column(db.String(50), nullable=False)
     parent_name = db.Column(db.String(100), nullable=False)
     parent_email = db.Column(db.String(100), nullable=False)
     parent_phone = db.Column(db.String(10), nullable=False)
@@ -35,6 +39,8 @@ class parent_users(UserMixin, db.Model):
 
 class teacher_users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(50), nullable=False)
+    password = db.Column(db.String(50), nullable=False)
     teacher_name = db.Column(db.String(100), nullable=False)
     teacher_email = db.Column(db.String(100), nullable=False)
     pre_lang_teacher = db.Column(db.String(100))
