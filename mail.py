@@ -1,5 +1,4 @@
 import os
-from flask_mail import Message
 import flask, os
 from dotenv import load_dotenv, find_dotenv
 from config import ADMINS
