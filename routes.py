@@ -291,11 +291,7 @@ def createAccountParent():
     current_user.parent_phone = input_parentr_phone
     if(input_child_name != "" or input_child_name != None):
         current_user.child = input_child_name
-
-    print(input_parent_name)
-    print(input_understanding)
-    print(input_pre_lang_parent)
-    #db.session.commit()
+    db.session.commit()
 
     status = 400
     newAccountCreated = False
