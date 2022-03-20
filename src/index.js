@@ -12,17 +12,17 @@ import reportWebVitals from './reportWebVitals';
 import LandingPage from './Pages/landing';
 //import CreateAccountPage from './Pages/CreateAccountPage';
 import OnboardingPage from './Pages/onboarding';
+import Navigation from './Components/Navigation';
 import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
+      <Navigation />
     <Router>
       <Routes>
         <Route exact path="/" element={<LandingPage />} />
         {/* <Route path="/createAccount" element={<CreateAccountPage />} /> */}
         <Route path="/onboarding" element={<OnboardingPage />} />
-
-
       </Routes>
     </Router>
   </React.StrictMode>,

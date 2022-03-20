@@ -6,6 +6,7 @@ import React, {
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import SingleOptionPopUp from '../Components/SingleOptionPopUp';
+import {FormCheck} from "react-bootstrap";
 
 const OnboardingPage = () => {
   // set state
@@ -35,6 +36,9 @@ const OnboardingPage = () => {
     var education = edu.options[edu.selectedIndex].text;
     var lang = document.getElementById("parent_pref_lang");
     var parent_pref_lang = lang.options[lang.selectedIndex].text;
+
+    const pref_contact_sms = document.getElementById('pref_sms').value;
+    const pref_contact_email = document.getElementById('pref_email').value;
 
     // send to database, wait until db responds before continueing
     await fetch(`/createAccountStudent?name=${name}&education=${education}&classroom_id=${classroom_id}&parent_name=${parent_name}&parent_email=${parent_email}&parent_phone=${parent_phone}&parent_pref_lang=${parent_pref_lang}`, {
@@ -328,6 +332,7 @@ const OnboardingPage = () => {
         </select>
         <div>Your Phone Number: (Do not Include Dashes)</div>
         <input type="text" placeholder="parent_phone" id="parent_phone" maxLength={10} />
+        <div>Your Phone Number: (Do not Include Dashes)</div>
         <div>Your Preferred Language for Communications:</div>
         <select data-placeholder="Choose a Language..." id="parent_pref_lang">
           <option value="Afrikaans">Afrikaans</option>
