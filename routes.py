@@ -1,5 +1,5 @@
 from app import app, db, oauth
-from models import student_users, parent_users, teacher_users
+from models import student_users, parent_users, teacher_users, scores, notifications
 import flask
 from flask_login import (
     LoginManager,
@@ -122,17 +122,17 @@ def authorizedTeacher():
     else:
         return "User email not available or not verified by Google.", 400
     # Create a user in our database with the information provided by the Google response json
-    newUser = user(teacher_email=users_email)
+    newUser = teacher_users(teacher_email=users_email)
 
     # Doesn't exist? Add it to the database.
     previousUser = True
-    if not user.query.filter_by(teacher_email=users_email).first():
+    if not teacher_users.query.filter_by(teacher_email=users_email).first():
         db.session.add(newUser)
         db.session.commit()
         previousUser = False
 
     # Begin user session by logging the user in
-    login_user(user.query.filter_by(teacher_email=users_email).first())
+    login_user(teacher_users.query.filter_by(teacher_email=users_email).first())
 
     # if user already exists, send straight to their home page
     if previousUser:
@@ -354,6 +354,73 @@ def module2dog():
 def module2plane():
     return flask.render_template("./index.html")
 
+@app.route("/mod1quiz")
+def module1quiz():
+    return flask.render_template("./index.html")
+
+@app.route("/mod2quiz")
+def module2quiz():
+    return flask.render_template("./index.html")
+
+@app.route("/updateAssessment1Score")
+def updateScore1():
+    input_score = flask.request.args.get('score')
+    module = "Module #1"
+    curr_student = current_user.id 
+    curr_parent = current_user.parent_id
+
+    newScoreReport = scores(score=input_score, assessment=module, student=curr_student, parent=curr_parent)
+    db.commit(newScoreReport)
+
+    if scores.query.filter_by(
+        assessment=module, student=curr_student
+    ).first():
+        if (
+            scores.query.filter_by(
+                assessment=module, student=curr_student
+            )
+            .first()
+            .parent
+            == curr_parent
+        ):
+            status = 200
+            newAccountCreated = True
+            message = "success!"
+    return {
+        "status": status,
+        "newAccountCreated": newAccountCreated,
+        "message": message,
+    }
+
+@app.route("/updateAssessment2Score")
+def updateScore2():
+    input_score = flask.request.args.get('score')
+    module = "Module #2"
+    curr_student = current_user.id 
+    curr_parent = current_user.parent_id
+
+    newScoreReport = scores(score=input_score, assessment=module, student=curr_student, parent=curr_parent)
+    db.commit(newScoreReport)
+
+    if scores.query.filter_by(
+        assessment=module, student=curr_student
+    ).first():
+        if (
+            scores.query.filter_by(
+                assessment=module, student=curr_student
+            )
+            .first()
+            .parent
+            == curr_parent
+        ):
+            status = 200
+            newAccountCreated = True
+            message = "success!"
+    return {
+        "status": status,
+        "newAccountCreated": newAccountCreated,
+        "message": message,
+    }
 
 
 # send manifest.json file
@@ -371,5 +438,5 @@ def main():
 
 if __name__ == "__main__":
     app.run(
-        host=os.getenv("IP", "127.0.0.1"), port=int(os.getenv("PORT", 5000)), debug=True
+        host=os.getenv("IP", "0.0.0.0"), port=int(os.getenv("PORT", 5000)), debug=True
     )
