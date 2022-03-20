@@ -1,5 +1,5 @@
 .bg-navbar{
-    background-color: #9400D3;
+    background-color: #8087d3;
 }
 .landingPageInfo{
     background-color:#f3e1df;
@@ -16,7 +16,7 @@
     width: 90%;
     background-color: #fff;
     padding: 50px;
-    border-radius: 50px;
+    border-radius: 20px;
     margin: 50px  50px;
     box-shadow: 0 8px 10px grey;
 }
