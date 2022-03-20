@@ -11,7 +11,9 @@ import {
 import reportWebVitals from './reportWebVitals';
 import LandingPage from './Pages/landing';
 //import CreateAccountPage from './Pages/CreateAccountPage';
+import Module2Page1 from './Pages/module2pages/page1';
 import OnboardingPage from './Pages/onboarding';
+
 
 ReactDOM.render(
   <React.StrictMode>
@@ -19,7 +21,11 @@ ReactDOM.render(
       <Routes>
         <Route exact path="/" element={<LandingPage />} />
         {/* <Route path="/createAccount" element={<CreateAccountPage />} /> */}
+        <Route exact path="/module2-page1" element={<Module2Page1 />} />
+
         <Route path="/onboarding" element={<OnboardingPage />} />
+
+       
       </Routes>
     </Router>
   </React.StrictMode>,
