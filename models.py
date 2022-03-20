@@ -29,6 +29,8 @@ class parent_users(UserMixin, db.Model):
     parent_phone = db.Column(db.String(10), nullable=False)
     pre_lang_parent = db.Column(db.String(50),  nullable=False)
     understanding_level = db.Column(db.String(50))
+    pref_text = db.Column(db.Boolean, nullable=False)
+    pref_email = db.Column(db.Boolean, nullable=False)
     child = db.Column(db.Integer, db.ForeignKey("student_users.name", ondelete="CASCADE"))
 
 class teacher_users(UserMixin, db.Model):

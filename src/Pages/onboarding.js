@@ -6,6 +6,8 @@ import React, {
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import SingleOptionPopUp from '../Components/SingleOptionPopUp';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {Navbar, Container, Nav, Card, Button, CardGroup} from 'react-bootstrap';
 
 const OnboardingPage = () => {
   // set state

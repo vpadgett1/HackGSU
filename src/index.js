@@ -10,7 +10,6 @@ import {
 } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import LandingPage from './Pages/landing';
-//import CreateAccountPage from './Pages/CreateAccountPage';
 import OnboardingPage from './Pages/onboarding';
 
 ReactDOM.render(
@@ -18,7 +17,6 @@ ReactDOM.render(
     <Router>
       <Routes>
         <Route exact path="/" element={<LandingPage />} />
-        {/* <Route path="/createAccount" element={<CreateAccountPage />} /> */}
         <Route path="/onboarding" element={<OnboardingPage />} />
       </Routes>
     </Router>

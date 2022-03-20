@@ -17,9 +17,9 @@ const LandingPage = () => (
         <Container>
           <Navbar.Brand href="#home">Ai-Like</Navbar.Brand>
           <Nav className="justify-content-end">
-            <Nav.Link href="#home">Student Login/Signup</Nav.Link>
-            <Nav.Link href="#features">Parent Login/Signup</Nav.Link>
-            <Nav.Link href="#pricing">Teacher Login/Signup</Nav.Link>
+            <Nav.Link href="/loginStudent">Student Login/Signup</Nav.Link>
+            <Nav.Link href="/loginParent">Parent Login/Signup</Nav.Link>
+            <Nav.Link href="/loginTeacher">Teacher Login/Signup</Nav.Link>
           </Nav>
         </Container>
       </Navbar>

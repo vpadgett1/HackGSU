@@ -18,8 +18,8 @@ if db_url.startswith("postgres://"):
     db_url = db_url.replace("postgres://", "postgresql://", 1)
 app.config["SQLALCHEMY_DATABASE_URI"] = db_url
 # Gets rid of a warning
-app.config['GOOGLE_CLIENT_ID'] = os.getenv("Google_Client_Id")
-app.config['GOOGLE_CLIENT_SECRET'] = os.getenv("Google_Client_Secret")
+app.config['GOOGLE_CLIENT_ID'] = os.getenv("GOOGLE_CLIENT_ID")
+app.config['GOOGLE_CLIENT_SECRET'] = os.getenv("GOOGLE_CLIENT_SECRET")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.secret_key = os.environ.get("SECRET_KEY")
 oauth = OAuth(app)

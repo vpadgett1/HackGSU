@@ -145,7 +145,8 @@ def authorizedTeacher():
 
 @app.route("/loginParent", methods=["POST"])
 def loginParent_post():
-    return google.authorize(callback=flask.url_for("/loginParent/authorized", _external=True))
+    print("hello darkness")
+    return google.authorize(callback=flask.url_for("authorized", _external=True))
 
 
 @app.route("/loginParent/authorized")
@@ -321,19 +322,15 @@ def createAccountParent():
 def manifest():
     return flask.send_from_directory("./build", "manifest.json")
 
-
 @app.route("/")
 def main():
     if current_user.is_authenticated:
-        if current_user.name:
             return flask.redirect(flask.url_for("module"))
-        else:
-            return flask.redirect(flask.url_for("onboarding"))
     else:
         return flask.render_template("index.html")
 
 
 if __name__ == "__main__":
     app.run(
-        host=os.getenv("IP", "0.0.0.0"), port=int(os.getenv("PORT", 8000)), debug=True
+        host=os.getenv("IP", "127.0.0.1"), port=int(os.getenv("PORT", 5000)), debug=True
     )
