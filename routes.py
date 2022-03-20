@@ -15,6 +15,7 @@ import base64
 from flask_oauthlib.client import OAuth, OAuthException
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv, find_dotenv
+import mail
 
 
 load_dotenv(find_dotenv())
@@ -104,7 +105,7 @@ def authorizedStudent():
 
 @app.route("/loginTeacher", methods=["POST"])
 def loginTeacher_post():
-    return google.authorize(callback=flask.url_for("loginTeacher/authorized", _external=True))
+    return google.authorize(callback=flask.url_for("authorized", _external=True))
 
 
 @app.route("/loginTeacher/authorized")
@@ -122,17 +123,17 @@ def authorizedTeacher():
     else:
         return "User email not available or not verified by Google.", 400
     # Create a user in our database with the information provided by the Google response json
-    newUser = teacher_users(teacher_email=users_email)
+    newUser = user(teacher_email=users_email)
 
     # Doesn't exist? Add it to the database.
     previousUser = True
-    if not teacher_users.query.filter_by(teacher_email=users_email).first():
+    if not user.query.filter_by(teacher_email=users_email).first():
         db.session.add(newUser)
         db.session.commit()
         previousUser = False
 
     # Begin user session by logging the user in
-    login_user(teacher_users.query.filter_by(teacher_email=users_email).first())
+    login_user(user.query.filter_by(teacher_email=users_email).first())
 
     # if user already exists, send straight to their home page
     if previousUser:
@@ -142,7 +143,7 @@ def authorizedTeacher():
         # if merchant user, send to merchant homepage
         # otherwise, regular
         else:
-            return flask.redirect(flask.url_for("homepage"))
+            return flask.redirect(flask.url_for("module"))
 
     # if not, send to onboarding
     return flask.redirect(flask.url_for("onboarding"))

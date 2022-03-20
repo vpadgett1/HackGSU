@@ -15,7 +15,7 @@ from email.mime.multipart import MIMEMultipart
 
 load_dotenv(find_dotenv())
 
-host = 'premium5.web-hosting.com',
+host = 'premium5.web-hosting.com'
 username = os.getenv('MAIL_USERNAME')
 password =os.getenv('MAIL_PASSWORD')
 
