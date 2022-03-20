@@ -86,6 +86,18 @@ export default function App() {
         return window.location.href='/homepage';
       }
 
+      function sendScoreData(){
+        const email = document.getElementById('email').value;
+        fetch(`/mailer?score=${score}&num_of_questions=${questions.length}&email=${email}`, {
+            method: 'POST',
+          })
+            .then((response) => response.json())
+            .then((result) => {
+              console.log("Email sent!")
+            })
+            .catch((response) => console.log(response));
+    }
+
 	return (
 		<div className='app'>
 			{showScore ? (
@@ -96,6 +108,14 @@ export default function App() {
                     </div>
                     <div>
                         <button type="submit" onClick={movePage}>Click Here To Return To Homepage</button>
+                    </div>
+                    <div>
+                        <form>
+                            Send Yourself Your Score Reports By Entering Your Email Below:
+                            <input type="text" placeholder="email" id="email" maxLength={50} />
+                            <br />
+                            <button type="button" onClick={sendScoreData} className="continueButton">Send Email</button>
+                        </form>
                     </div>
                 </div>
 			) : (
