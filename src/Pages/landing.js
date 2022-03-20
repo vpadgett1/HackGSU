@@ -12,8 +12,6 @@ import React, {
 const LandingPage = () => (
   <div className="landingPage">
     <div className="landingPageInfo">
-
-
       <Card>
         <Card.Header className="whyAIMattersTitle">Why AI Matters</Card.Header>
         <Card.Body>

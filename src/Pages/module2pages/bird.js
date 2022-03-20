@@ -26,7 +26,7 @@ function Module2bird () {
       <div className='images'>
         <img src={bird} onClick={() => window.location.href='/module2-bird'}/>
       </div>
-      Can you describe why you said this was a Cat(whatever object the student clicks on)?
+      Can you describe why you said this was a bird?
       <ul>
         {birdQuality.map(birdQ => <Birdstuff name = {birdQ}/>)}
       </ul>

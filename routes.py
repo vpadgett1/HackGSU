@@ -326,6 +326,34 @@ def createAccountParent():
 def homepage():
     return flask.render_template("./index.html")
 
+@app.route("/module_1")
+def module1page():
+    return flask.render_template("./index.html")
+
+@app.route("/module2-page1")
+def module2page1():
+    return flask.render_template("./index.html")
+
+@app.route("/module2-page2")
+def module2page2():
+    return flask.render_template("./index.html")
+
+@app.route("/module2-bird")
+def module2bird():
+    return flask.render_template("./index.html")
+
+@app.route("/module2-cat")
+def module2cat():
+    return flask.render_template("./index.html")
+
+@app.route("/module2-dog")
+def module2dog():
+    return flask.render_template("./index.html")
+
+@app.route("/module2-plane")
+def module2plane():
+    return flask.render_template("./index.html")
+
 # send manifest.json file
 @app.route("/manifest.json")
 def manifest():

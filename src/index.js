@@ -14,6 +14,9 @@ import LandingPage from './Pages/landing';
 import Module2Page1 from './Pages/module2pages/page1';
 import Module2Page2 from './Pages/module2pages/page2';
 import Module2bird from './Pages/module2pages/bird';
+import Module2cat from './Pages/module2pages/cat';
+import Module2dog from './Pages/module2pages/dog';
+import Module2plane from './Pages/module2pages/plane';
 import OnboardingPage from './Pages/onboarding';
 import HomePage from './Pages/homepage';
 import Navigation from './Components/Navigation';
@@ -31,6 +34,9 @@ ReactDOM.render(
         <Route exact path="/module2-page1" element={<Module2Page1 />} />
         <Route exact path="/module2-page2" element={<Module2Page2 />} />
         <Route exact path="/module2-bird" element={<Module2bird />} />
+        <Route exact path="/module2-cat" element={<Module2cat />} />
+        <Route exact path="/module2-dog" element={<Module2dog />} />
+        <Route exact path="/module2-plane" element={<Module2plane />} />
       </Routes>
     </Router>
   </React.StrictMode>,
