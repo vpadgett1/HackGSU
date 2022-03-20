@@ -15,6 +15,7 @@ import base64
 from flask_oauthlib.client import OAuth, OAuthException
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv, find_dotenv
+from mail import send_mail
 
 
 load_dotenv(find_dotenv())
@@ -422,6 +423,13 @@ def updateScore2():
         "message": message,
     }
 
+@app.route("/mailer", methods="POST")
+def mailer():
+    email = flask.request.args.get('email')
+    score = flask.request.args.get('score')
+    quantity_questions = flask.request.args.get('num_of_questions')
+    body = f"Greetings!\nYou have a test score of {score} with {quantity_questions} questions.\n Keep up the hard work!\n\n-Ai-Like Team"
+    send_mail(text=body, subject='Test Scores', to_emails=[email], html=None)
 
 # send manifest.json file
 @app.route("/manifest.json")

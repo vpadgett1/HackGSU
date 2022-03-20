@@ -7,10 +7,10 @@
 
 .whoWeAre{
     //background: linear-gradient(,#a621df,#450461);
-    background-image: linear-gradient(180deg, rgba(255,0,0,0), rgb(85, 176, 218));
+    background-image: linear-gradient(180deg, rgb(128, 135, 211), rgb(184, 191, 207));
     padding: 50px;
-    border-top-left-radius: 50px;
-    border-top-right-radius: 50px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
     text-align: center;
 }
 .functionalityCard {
@@ -29,5 +29,6 @@
     height:60%;
     margin-left: 20%;
     margin-top: 10%;
+    color: black;
     /* left: 20px; */
 }
