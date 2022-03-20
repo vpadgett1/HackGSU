@@ -12,6 +12,8 @@ import reportWebVitals from './reportWebVitals';
 import LandingPage from './Pages/landing';
 //import CreateAccountPage from './Pages/CreateAccountPage';
 import Module2Page1 from './Pages/module2pages/page1';
+import Module2Page2 from './Pages/module2pages/page2';
+import Module2bird from './Pages/module2pages/bird';
 import OnboardingPage from './Pages/onboarding';
 
 
@@ -22,6 +24,8 @@ ReactDOM.render(
         <Route exact path="/" element={<LandingPage />} />
         {/* <Route path="/createAccount" element={<CreateAccountPage />} /> */}
         <Route exact path="/module2-page1" element={<Module2Page1 />} />
+        <Route exact path="/module2-page2" element={<Module2Page2 />} />
+        <Route exact path="/module2-bird" element={<Module2bird />} />
 
         <Route path="/onboarding" element={<OnboardingPage />} />
 
