@@ -15,7 +15,7 @@ const LandingPage = () => (
 
       <Navbar bg="navbar" variant="dark">
         <Container>
-          <Navbar.Brand href="#home">Ai-Like</Navbar.Brand>
+          <Navbar.Brand href="#home"> <b>Ai-Like</b></Navbar.Brand>
           <Nav className="justify-content-end">
             <Nav.Link href="#home">Student Login/Signup</Nav.Link>
             <Nav.Link href="#features">Parent Login/Signup</Nav.Link>
@@ -39,17 +39,26 @@ const LandingPage = () => (
           Why kids should learn about AI
         </h3>
         <div>
-            AI has become increasingly important ...
+        <p>There are several advantages of using AI, one of them being it reduces human error. As a result, they are much more reliable and efficient in the way they work. Due to this, AI will change the job nature in all the fields as they will automate or aid in processes that are prone to errors or require careful attention.</p>
+        <p>Since AI is an integral part of our life, kids need to learn AI. It will give them better insights at how our everyday products that run AI work. PwC (Price Waterhouse Corporation) expects that AI would potentially contribute to the global economy.</p>
+        <p>Also, that would mean that it would contribute to 45% of the total economic gains by 2030. Experts in Finance and AI say that ignoring AI is similar to ignoring the internet in the late 20th century. It is also believed that the current AI systems are heavily biased and as the generation that is going to develop the next AI systems.
+        </p>
           </div>
       </div>
    
       <div class="functionalityCard">
         <h3>
-          Resources
+          More Resources
         </h3>
         <div>
-            ...
-          </div>
+            <a href="https://www.aiforanyone.org/"> AI For Anyone</a>
+            <br/>
+            <a href="https://www.preface.ai/blog/kids-learning/ai-for-kids/"> The Ultimate Guide for Artificial Intelligence (AI) for Kids </a>
+            <br/>
+            <a href="https://www.youtube.com/watch?v=OPWj3cxJIHw&ab_channel=DataScienceandAIforKids"> How to Explain Artificial Intelligence (AI) to Kids in under 3 minutes. </a>
+            <br/>
+            <a href="https://www.create-learn.us/ai-for-kids"> Artificial Intelligence For Kids </a>
+        </div>
       </div>
    
 
