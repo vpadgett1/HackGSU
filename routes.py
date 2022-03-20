@@ -570,18 +570,20 @@ def updateScore2():
 def mailer():
     email = flask.request.args.get('email')
     score = flask.request.args.get('score')
-    quantity_questions = flask.request.args.get('num_of_questions')
-    body = f"Greetings!\nYou have a test score of {score} with {quantity_questions} questions.\n Keep up the hard work!\n\n-Ai-Like Team"
+    total = flask.request.args.get('num_of_questions')
+    percent = round(score / total, 2)
+    body = f"Greetings!\nYou have a test score of {percent}% with {quantity_questions} questions.\n Keep up the hard work!\n\n-Ai-Like Team"
     send_mail(text=body, subject='Test Scores', to_emails=[email], html=None)
     return flask.jsonify({"status":"200"})
 
 
 @app.route("/sms", methods=["POST"])
-def mailer():
+def sms():
     sms = flask.request.args.get('sms')
     score = flask.request.args.get('score')
-    quantity_questions = flask.request.args.get('num_of_questions')
-    body = f"Greetings!\nYou have a test score of {score} with {quantity_questions} questions.\n Keep up the hard work!\n\n-Ai-Like Team"
+    total = flask.request.args.get('num_of_questions')
+    percent = round(float(score)/float(total), 2)
+    body = f"Greetings!\nYou have a score of {percent}% with {quantity_questions} questions.-Ai-Like Team"
     send_message(body, sms)
     return flask.jsonify({"status":"200"})
 

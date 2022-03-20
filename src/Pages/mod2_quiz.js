@@ -98,6 +98,18 @@ export default function App() {
             .catch((response) => console.log(response));
     }
 
+    function sendScoreDataSMS(){
+        const sms = document.getElementById('phone').value;
+        fetch(`/sms?score=${score}&num_of_questions=${questions.length}&sms=${sms}`, {
+            method: 'POST',
+          })
+            .then((response) => response.json())
+            .then((result) => {
+              console.log("SMS Message sent!")
+            })
+            .catch((response) => console.log(response));
+    }
+
 	return (
 		<div className='app'>
 			{showScore ? (
@@ -115,6 +127,14 @@ export default function App() {
                             <input type="text" placeholder="email" id="email" maxLength={50} />
                             <br />
                             <button type="button" onClick={sendScoreData} className="continueButton">Send Email</button>
+                        </form>
+                    </div>
+					<div>
+                        <form>
+                            Send Yourself Your Score Reports By Entering Your Phone Number Below:
+                            <input type="text" placeholder="phone" id="phone" maxLength={50} />
+                            <br />
+                            <button type="button" onClick={sendScoreDataSMS} className="continueButton">Send SMS Message</button>
                         </form>
                     </div>
                 </div>
