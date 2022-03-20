@@ -330,7 +330,7 @@ def main():
         else:
             return flask.redirect(flask.url_for("onboarding"))
     else:
-        return flask.render_template("index.html")
+        return flask.render_template("./index.html")
 
 
 if __name__ == "__main__":

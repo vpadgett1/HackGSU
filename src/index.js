@@ -2,7 +2,7 @@
 /* eslint-disable import/no-named-as-default */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+
 import {
   BrowserRouter as Router,
   Route,
@@ -12,6 +12,7 @@ import reportWebVitals from './reportWebVitals';
 import LandingPage from './Pages/landing';
 //import CreateAccountPage from './Pages/CreateAccountPage';
 import OnboardingPage from './Pages/onboarding';
+import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
