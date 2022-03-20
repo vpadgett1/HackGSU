@@ -24,7 +24,7 @@ function Module2bird () {
   return (
     <div>
       <div className='images'>
-        <img src={bird} onClick={() => window.location.href='/module2-bird'}/>
+        <img src={bird} />
       </div>
       Can you describe why you said this was a bird?
       <ul>
@@ -36,7 +36,9 @@ function Module2bird () {
       </div>
       
       <button onClick={updateList}> Update List </button>
-      
+      <div >
+         <button onClick={ () =>  window.location.href='/module2-birdidentification'}> Continue </button>
+      </div>
     </div>
   );
 }
