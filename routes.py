@@ -221,8 +221,9 @@ def authorizedStudent():
         login_info = student_users(username=login_user, password=password, student_emaill=email)
         db.session.add(login_info)
         db.session.commit()
+        return flask.redirect(flask.url_for("/onboarding"))
 
-    return flask.redirect(flask.url_for("onboarding"))
+    return flask.render_template("./index.html")
 
 
 @app.route("/loginTeacher")
@@ -406,8 +407,20 @@ def createAccountParent():
 def homepage():
     return flask.render_template("./index.html")
 
-@app.route("/module_1")
-def module1page():
+@app.route("/module1_pg1")
+def module1page1():
+    return flask.render_template("./index.html")
+
+@app.route("/module1_pg2")
+def module1page2():
+    return flask.render_template("./index.html")
+
+@app.route("/module1_pg3")
+def module1page3():
+    return flask.render_template("./index.html")
+
+@app.route("/module1_pg4")
+def module1page4():
     return flask.render_template("./index.html")
 
 @app.route("/module2-page1")

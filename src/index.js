@@ -10,8 +10,13 @@ import {
 } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import LandingPage from './Pages/landing';
+import LoginStudent from './Pages/loginStudent'
 //import CreateAccountPage from './Pages/CreateAccountPage';
 import Module1 from './Pages/module1'
+import Module1Page1 from './Pages/module1pages/page1';
+import Module1Page2 from './Pages/module1pages/page2';
+import Module1Page3 from './Pages/module1pages/page3';
+import Module1Page4 from './Pages/module1pages/page4';
 import Module2Page1 from './Pages/module2pages/page1';
 import Module2Page2 from './Pages/module2pages/page2';
 import Module2bird from './Pages/module2pages/bird';
@@ -36,7 +41,12 @@ ReactDOM.render(
         <Route exact path="/" element={<LandingPage />} />
         <Route path="/onboarding" element={<OnboardingPage />} />
         <Route path="/homepage" element={<HomePage />} />
+        <Route path="/loginStudent" element={<LoginStudent />} />
         <Route path="/module_1" element={<Module1 />} />
+        <Route path="/module1_pg1" element={<Module1Page1 />} />
+        <Route path="/module1_pg2" element={<Module1Page2 />} />
+        <Route path="/module1_pg3" element={<Module1Page3 />} />
+        <Route path="/module1_pg4" element={<Module1Page4 />} />
         <Route exact path="/module2-page1" element={<Module2Page1 />} />
         <Route exact path="/module2-page2" element={<Module2Page2 />} />
         <Route exact path="/module2-bird" element={<Module2bird />} />

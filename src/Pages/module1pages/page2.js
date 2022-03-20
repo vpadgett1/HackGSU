@@ -1,8 +1,10 @@
 import '../module1pages/module1styling/style.css';
-import coding from '../../mod1images/coding.jpg';
+import coding from '../../mod1images/coding.png';
 import AI from '../../mod1images/AI.jpg'; 
 function Module1Page2 () {
-
+  function movePage(){
+    return window.location.href='/module1_pg3';
+  }
   return (
     <div>
       <div>
@@ -17,6 +19,8 @@ function Module1Page2 () {
       </div>
       <div class='image'><img src={coding}/></div>
       <div class='image'><img src={AI}/></div>
+      <br/>
+      <button type="submit" onClick={movePage}>Continue</button>
     </div>
   );
 }

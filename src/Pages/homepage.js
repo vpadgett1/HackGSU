@@ -19,7 +19,7 @@ const HomePage = () => (
                             <Card.Text>
                             Learn the Important Words You Need to Know Before Working with AI. 
                             </Card.Text>
-                            <Card.Link href="/module1">Click Here to Begin Learning!</Card.Link>
+                            <Card.Link href="/module1_pg1">Click Here to Begin Learning!</Card.Link>
                         </Card.Body>
                     </Card>
 
@@ -31,7 +31,7 @@ const HomePage = () => (
                             <Card.Text>
                             View A Working Visual with Explainations on how AI recongizes objects. 
                             </Card.Text> 
-                            <Card.Link href="/module2">Click Here to Begin Learning!</Card.Link>
+                            <Card.Link href="/module2-page1">Click Here to Begin Learning!</Card.Link>
                         </Card.Body>
                     </Card>
             </div>

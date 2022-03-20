@@ -82,13 +82,22 @@ export default function App() {
             .catch((response) => console.log(response));
     }
 
+    function movePage(){
+        return window.location.href='/homepage';
+      }
+
 	return (
 		<div className='app'>
 			{showScore ? (
                 transferScoretoDB(),
-				<div className='score-section'>
-					You scored {score} out of {questions.length}
-				</div>
+				<div>
+                    <div className='score-section'>
+                        You scored {score} out of {questions.length}
+                    </div>
+                    <div>
+                        <button type="submit" onClick={movePage}>Click Here To Return To Homepage</button>
+                    </div>
+                </div>
 			) : (
 				<>
 					<div className='question-section'>
