@@ -5,7 +5,12 @@ import flask, os
 from dotenv import load_dotenv, find_dotenv
 from flask_mail import Mail, Connection, Attachment
 from config import ADMINS
-import config
+import config as ADMIN
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
+
 # email ser
 # administrator list
 
@@ -13,7 +18,7 @@ load_dotenv(find_dotenv())
 
 app = flask.Flask(__name__)
 # Setup Mail
-mail = Mail(app)
+mail_ = Mail(app)
 
 
 def send_email(subject, sender, recipients, text_body, html_body):
@@ -24,9 +29,9 @@ def send_email(subject, sender, recipients, text_body, html_body):
             msg.body = text_body
             msg.html = html_body
 
-            mail.send(msg)
+            mail_.send(msg)
         except ConnectionRefusedError:
-            print(f'Connection Refused: {}')
+            print(f'Connection Refused: {ConnectionRefusedError.strerror}')
     return msg
 
 
@@ -38,7 +43,7 @@ def send_email(subject, sender, recipients, text_body, html_body):
 import imaplib
 import email
 
-host = config['MAIL_SERVER']
+host = ADMIN.MAIL_SERVER
 username = os.getenv('MAIL_USERNAME')
 password =os.getenv('MAIL_PASSWORD')
 
@@ -69,6 +74,43 @@ def get_inbox():
     return my_message
 
 
+def send_mail(text='Email Body', subject='Hello World', to_emails=None, html=None):
+    '''
+    Sends mail from admin
+    :param text: Email Body as inline text String
+    :param subject: Email Subject
+    :param to_emails: List of Emails to send
+    :param html: Email Body as HTML inline String
+    :return:
+    '''
+    assert isinstance(to_emails, list)
+    msg = MIMEMultipart('alternative')
+    msg['From'] = from_email
+    msg['To'] = ", ".join(to_emails)
+    msg['Subject'] = subject
+    print(f'Subject: {subject}')
+    txt_part = MIMEText(text, 'plain')
+    msg.attach(txt_part)
+    if html != None:
+        html_part = MIMEText(html, 'html')
+        msg.attach(html_part)
+    msg_str = msg.as_string()
+
+    # login to my smtp server
+    server = smtplib.SMTP_SSL(host='premium5.web-hosting.com', port=465)
+    print('I am here')
+    server.ehlo()
+    # server.starttls()
+    server.login(username, password)
+    server.sendmail(from_email, to_emails, msg_str)
+    server.
+    server.quit()
+    return
+
+
 if __name__ == "__main__":
-    my_inbox = get_inbox()
-    print(my_inbox)
+    # my_inbox = get_inbox()
+    # print(my_inbox)
+    send_mail(to_emails=['jarrywc@gmail.com'])
+
+    print(f'{mail}')
