@@ -222,8 +222,8 @@ def authorizedStudent():
         db.session.add(login_info)
         db.session.commit()
         return flask.redirect(flask.url_for("/onboarding"))
-
-    return flask.render_template("./index.html")
+    if flask.request.method=="GET":
+        return flask.render_template("./index.html")
 
 
 @app.route("/loginTeacher")
@@ -445,6 +445,54 @@ def module2dog():
 
 @app.route("/module2-plane")
 def module2plane():
+    return flask.render_template("./index.html")
+
+@app.route("/module2-birdidentification")
+def module2birdid():
+    return flask.render_template("./index.html")
+
+@app.route("/module2-catidentification")
+def module2catid():
+    return flask.render_template("./index.html")
+
+@app.route("/module2-dogidentification")
+def module2dogid():
+    return flask.render_template("./index.html")
+
+@app.route("/module2-planeidentification")
+def module2planeid():
+    return flask.render_template("./index.html")
+
+@app.route("/module2-catlayers")
+def module2catlayers():
+    return flask.render_template("./index.html")
+
+@app.route("/module2-birdlayers")
+def module2birdlayers():
+    return flask.render_template("./index.html")
+
+@app.route("/module2-doglayers")
+def module2doglayers():
+    return flask.render_template("./index.html")
+
+@app.route("/module2-planelayers")
+def module2planelayers():
+    return flask.render_template("./index.html")
+
+@app.route("/module2-catregions")
+def module2catregions():
+    return flask.render_template("./index.html")
+
+@app.route("/module2-birdregions")
+def module2birdregions():
+    return flask.render_template("./index.html")
+
+@app.route("/module2-dogregions")
+def module2dogregions():
+    return flask.render_template("./index.html")
+
+@app.route("/module2-planeregions")
+def module2planeregions():
     return flask.render_template("./index.html")
 
 @app.route("/mod1quiz")
