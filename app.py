@@ -6,6 +6,7 @@
 import flask
 import os
 from flask_sqlalchemy import SQLAlchemy
+from flask_mail import Mail
 from dotenv import load_dotenv, find_dotenv
 from flask_oauthlib.client import OAuth, OAuthException
 
@@ -24,4 +25,5 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.secret_key = os.environ.get("SECRET_KEY")
 oauth = OAuth(app)
 
+mail = Mail(app)
 db = SQLAlchemy(app)

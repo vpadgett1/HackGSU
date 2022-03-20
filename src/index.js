@@ -2,7 +2,7 @@
 /* eslint-disable import/no-named-as-default */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+
 import {
   BrowserRouter as Router,
   Route,
@@ -11,6 +11,7 @@ import {
 import reportWebVitals from './reportWebVitals';
 import LandingPage from './Pages/landing';
 import OnboardingPage from './Pages/onboarding';
+import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -18,6 +19,8 @@ ReactDOM.render(
       <Routes>
         <Route exact path="/" element={<LandingPage />} />
         <Route path="/onboarding" element={<OnboardingPage />} />
+
+
       </Routes>
     </Router>
   </React.StrictMode>,

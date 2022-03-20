@@ -327,7 +327,7 @@ def main():
     if current_user.is_authenticated:
             return flask.redirect(flask.url_for("module"))
     else:
-        return flask.render_template("index.html")
+        return flask.render_template("./index.html")
 
 
 if __name__ == "__main__":
