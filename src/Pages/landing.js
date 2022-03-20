@@ -13,16 +13,6 @@ const LandingPage = () => (
   <div className="landingPage">
     <div className="landingPageInfo">
 
-      <Navbar bg="navbar" variant="dark">
-        <Container>
-          <Navbar.Brand href="#home">Ai-Like</Navbar.Brand>
-          <Nav className="justify-content-end">
-            <Nav.Link href="/loginStudent">Student Login/Signup</Nav.Link>
-            <Nav.Link href="/loginParent">Parent Login/Signup</Nav.Link>
-            <Nav.Link href="/loginTeacher">Teacher Login/Signup</Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar>
 
       <Card>
         <Card.Header className="whyAIMattersTitle">Why AI Matters</Card.Header>

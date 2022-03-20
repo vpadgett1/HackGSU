@@ -11,16 +11,16 @@ import {
 import reportWebVitals from './reportWebVitals';
 import LandingPage from './Pages/landing';
 import OnboardingPage from './Pages/onboarding';
+import Navigation from './Components/Navigation';
 import './index.css';
 
 ReactDOM.render(
   <React.StrictMode>
+      <Navigation />
     <Router>
       <Routes>
         <Route exact path="/" element={<LandingPage />} />
         <Route path="/onboarding" element={<OnboardingPage />} />
-
-
       </Routes>
     </Router>
   </React.StrictMode>,

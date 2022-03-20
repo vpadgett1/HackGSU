@@ -1,5 +1,4 @@
 Flask
-Flask-Mail
 python-dotenv
 requests
 flask_sqlalchemy

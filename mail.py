@@ -3,7 +3,6 @@ from app import mail
 from flask_mail import Message
 import flask, os
 from dotenv import load_dotenv, find_dotenv
-from flask_mail import Mail, Connection, Attachment
 from config import ADMINS
 import config as ADMIN
 import smtplib, imaplib, email
