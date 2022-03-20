@@ -28,14 +28,14 @@ import Module2_catidentification from './Pages/module2pages/catidentification';
 import Module2_dogidentification from './Pages/module2pages/dogidentification';
 import Module2_planeidentification from './Pages/module2pages/planeidentification';
 import Module2catlayers from './Pages/module2pages/catlayers';
-// import Module2doglayers from './Pages/module2pages/doglayers';
-// import Module2birdlayers from './Pages/module2pages/birdlayers';
-// import Module2planelayers from './Pages/module2pages/planelayers';
+import Module2doglayers from './Pages/module2pages/doglayers';
+import Module2birdlayers from './Pages/module2pages/birdlayers';
+import Module2planelayers from './Pages/module2pages/planelayers';
 
 import Module2catregions from './Pages/module2pages/catimportantregions';
-// import Module2birdregions from './Pages/module2pages/birdimportantregions';
-// import Module2planeregions from './Pages/module2pages/planeimportantregions';
-// import Module2dogregions from './Pages/module2pages/dogimportantregions';
+import Module2birdregions from './Pages/module2pages/birdimportantregions';
+import Module2planeregions from './Pages/module2pages/planeimportantregions';
+import Module2dogregions from './Pages/module2pages/dogimportantregions';
 
 import Module2Page3 from './Pages/module2pages/page3';
 import Module2Page4 from './Pages/module2pages/page4';
@@ -76,13 +76,13 @@ ReactDOM.render(
         <Route exact path="/module2-dogidentification" element={<Module2_dogidentification />} />
         <Route exact path="/module2-planeidentification" element={<Module2_planeidentification />} />
         <Route exact path="/module2-catlayers" element={<Module2catlayers />} />
-        {/* <Route exact path="/module2-birdlayers" element={<Module2birdlayers />} />
+        <Route exact path="/module2-birdlayers" element={<Module2birdlayers />} />
         <Route exact path="/module2-doglayers" element={<Module2doglayers />} />
-        <Route exact path="/module2-planelayers" element={<Module2planelayers />} /> */}
+        <Route exact path="/module2-planelayers" element={<Module2planelayers />} />
         <Route exact path="/module2-catregions" element={<Module2catregions />} />
-        {/* <Route exact path="/module2-birdregions" element={<Module2birdregions />} />
+        <Route exact path="/module2-birdregions" element={<Module2birdregions />} />
         <Route exact path="/module2-planeregions" element={<Module2planeregions />} />
-        <Route exact path="/module2-dogregions" element={<Module2dogregions />} /> */}
+        <Route exact path="/module2-dogregions" element={<Module2dogregions />} />
 
 
         <Route path="/mod1quiz" element={<Mod1Quiz />} />

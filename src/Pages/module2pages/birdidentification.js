@@ -19,7 +19,7 @@ function Module2_birdidentification () {
         </p>
 
       <div>
-         <button onClick={ () =>  window.location.href='/module2-page4'}> Continue </button>
+         <button onClick={ () =>  window.location.href='/module2-birdlayers'}> Continue </button>
       </div>
 
     </div>
