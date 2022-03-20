@@ -39,7 +39,7 @@ function Navigation() {
         <>
         <Navbar bg="navbar" variant="dark" className="p-0">
         <Container className="p-0">
-          <Navbar.Brand href="home"  className="ps-2 pt-2">
+          <Navbar.Brand href="homepage"  className="ps-2 pt-2">
               <h3>Ai-Like.me</h3>
           </Navbar.Brand>
           <Nav className="justify-content-end p-0">

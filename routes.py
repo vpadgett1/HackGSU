@@ -571,11 +571,11 @@ def mailer():
     email = flask.request.args.get('email')
     score = flask.request.args.get('score')
     total = flask.request.args.get('num_of_questions')
-    percent = round(score / total, 2)
-    body = f"Greetings!\nYou have a test score of {percent}% with {quantity_questions} questions.\n Keep up the hard work!\n\n-Ai-Like Team"
+    percent =  round(float(score)/float(total), 2)
+    body = f"Greetings!\nYou have a test score of {percent}% with {total} questions.\n Keep up the hard work!\n\n-Ai-Like Team"
     send_mail(text=body, subject='Test Scores', to_emails=[email], html=None)
     return flask.jsonify({"status":"200"})
-
++1
 
 @app.route("/sms", methods=["POST"])
 def sms():
@@ -583,8 +583,9 @@ def sms():
     score = flask.request.args.get('score')
     total = flask.request.args.get('num_of_questions')
     percent = round(float(score)/float(total), 2)
-    body = f"Greetings!\nYou have a score of {percent}% with {quantity_questions} questions.-Ai-Like Team"
+    body = f"Greetings! You have a score of {percent}% with {total} questions.-Ai-Like Team"
     send_message(body, sms)
+    print('Message sent')
     return flask.jsonify({"status":"200"})
 
 # send manifest.json file
