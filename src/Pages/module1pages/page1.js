@@ -1,7 +1,9 @@
 import '../module1pages/module1styling/style.css';
 import AI from '../../mod1images/AI.jpg';
 function Module1Page1 () {
-    let 
+  function movePage(){
+    return window.location.href='/module1_pg2';
+  }
 
   return (
     <div>
@@ -29,6 +31,8 @@ function Module1Page1 () {
       <div className='images'>
         <img src={AI}/>
       </div>
+      <br/>
+      <button type="submit" onClick={movePage}>Continue</button>
     </div>
   );
 }

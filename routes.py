@@ -15,7 +15,7 @@ import base64
 from flask_oauthlib.client import OAuth, OAuthException
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv, find_dotenv
-
+from werkzeug.security import generate_password_hash, check_password_hash
 
 load_dotenv(find_dotenv())
 os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
@@ -56,142 +56,223 @@ def get_google_oauth_token():
     return flask.session.get("google_token")
 
 
-@app.route("/loginStudent", methods=["POST"])
-def loginStudent_post():
-    return google.authorize(callback=flask.url_for("authorizedStudent", _external=True))
+# @app.route("/loginStudent", methods=["POST"])
+# def loginStudent_post():
+#     return google.authorize(callback=flask.url_for("authorizedStudent", _external=True))
 
 
-@app.route("/loginStudent/authorized")
+# @app.route("/loginStudent/authorized")
+# def authorizedStudent():
+#     resp = google.authorized_response()
+#     if resp is None:
+#         return "Access denied: reason=%s error=%s" % (
+#             flask.request.args["error_reason"],
+#             flask.request.args["error_description"],
+#         )
+#     flask.session["google_token"] = (resp["access_token"], "")
+#     me = google.get("userinfo")
+#     if me.data["verified_email"]:
+#         users_email = me.data["email"]
+#     else:
+#         return "User email not available or not verified by Google.", 400
+#     # Create a user in our database with the information provided by the Google response json
+#     newUser = student_users(student_email=users_email)
+
+#     # Doesn't exist? Add it to the database.
+#     previousUser = True
+#     if not student_users.query.filter_by(student_email=users_email).first():
+#         db.session.add(newUser)
+#         db.session.commit()
+#         previousUser = False
+
+#     # Begin user session by logging the user in
+#     login_user(student_users.query.filter_by(student_email=users_email).first())
+
+#     # if user already exists, send straight to their home page
+#     if previousUser:
+#         # check if user finished onboarding
+#         if current_user.name == None:
+#             return flask.redirect(flask.url_for("onboarding"))
+#         # if merchant user, send to merchant homepage
+#         # otherwise, regular
+#         else:
+#             return flask.redirect(flask.url_for("homepage"))
+
+#     # if not, send to onboarding
+#     return flask.redirect(flask.url_for("onboarding"))
+
+
+# @app.route("/loginTeacher", methods=["POST"])
+# def loginTeacher_post():
+#     return google.authorize(callback=flask.url_for("authorizedTeacher", _external=True))
+
+
+# @app.route("/loginTeacher/authorized")
+# def authorizedTeacher():
+#     resp = google.authorized_response()
+#     if resp is None:
+#         return "Access denied: reason=%s error=%s" % (
+#             flask.request.args["error_reason"],
+#             flask.request.args["error_description"],
+#         )
+#     flask.session["google_token"] = (resp["access_token"], "")
+#     me = google.get("userinfo")
+#     if me.data["verified_email"]:
+#         users_email = me.data["email"]
+#     else:
+#         return "User email not available or not verified by Google.", 400
+#     # Create a user in our database with the information provided by the Google response json
+#     newUser = teacher_users(teacher_email=users_email)
+
+#     # Doesn't exist? Add it to the database.
+#     previousUser = True
+#     if not teacher_users.query.filter_by(teacher_email=users_email).first():
+#         db.session.add(newUser)
+#         db.session.commit()
+#         previousUser = False
+
+#     # Begin user session by logging the user in
+#     login_user(teacher_users.query.filter_by(teacher_email=users_email).first())
+
+#     # if user already exists, send straight to their home page
+#     if previousUser:
+#         # check if user finished onboarding
+#         if current_user.name == None:
+#             return flask.redirect(flask.url_for("onboarding"))
+#         # if merchant user, send to merchant homepage
+#         # otherwise, regular
+#         else:
+#             return flask.redirect(flask.url_for("module"))
+
+#     # if not, send to onboarding
+#     return flask.redirect(flask.url_for("onboarding"))
+
+
+# @app.route("/loginParent", methods=["POST"])
+# def loginParent_post():
+#     print("hello darkness")
+#     return google.authorize(callback=flask.url_for("authorizedParent", _external=True))
+
+
+# @app.route("/loginParent/authorized")
+# def authorizedParent():
+#     resp = google.authorized_response()
+#     if resp is None:
+#         return "Access denied: reason=%s error=%s" % (
+#             flask.request.args["error_reason"],
+#             flask.request.args["error_description"],
+#         )
+#     flask.session["google_token"] = (resp["access_token"], "")
+#     me = google.get("userinfo")
+#     if me.data["verified_email"]:
+#         users_email = me.data["email"]
+#     else:
+#         return "User email not available or not verified by Google.", 400
+#     # Create a user in our database with the information provided by the Google response json
+#     newUser = parent_users(parent_email=users_email)
+
+#     # Doesn't exist? Add it to the database.
+#     previousUser = True
+#     if not parent_users.query.filter_by(parent_email=users_email).first():
+#         db.session.add(newUser)
+#         db.session.commit()
+#         previousUser = False
+
+#     # Begin user session by logging the user in
+#     login_user(parent_users.query.filter_by(parent_email=users_email).first())
+
+#     # if user already exists, send straight to their home page
+#     if previousUser:
+#         # check if user finished onboarding
+#         if current_user.name == None:
+#             return flask.redirect(flask.url_for("onboarding"))
+#         # if merchant user, send to merchant homepage
+#         # otherwise, regular
+#         else:
+#             return flask.redirect(flask.url_for("homepage"))
+
+#     # if not, send to onboarding
+#     return flask.redirect(flask.url_for("onboarding"))
+
+
+@app.route("/login")
+def login():
+    return flask.render_template("./index.html")
+
+
+@app.route("/loginStudent")
 def authorizedStudent():
-    resp = google.authorized_response()
-    if resp is None:
-        return "Access denied: reason=%s error=%s" % (
-            flask.request.args["error_reason"],
-            flask.request.args["error_description"],
-        )
-    flask.session["google_token"] = (resp["access_token"], "")
-    me = google.get("userinfo")
-    if me.data["verified_email"]:
-        users_email = me.data["email"]
-    else:
-        return "User email not available or not verified by Google.", 400
-    # Create a user in our database with the information provided by the Google response json
-    newUser = student_users(student_email=users_email)
+    if flask.request.method == "POST":
+        login_user = flask.request.form.get("login_user")
+        login_pass = flask.request.form.get("login_pass")
+        email = flask.request.form.get("email")
 
-    # Doesn't exist? Add it to the database.
-    previousUser = True
-    if not student_users.query.filter_by(student_email=users_email).first():
-        db.session.add(newUser)
+        user = student_users.query.filter_by(username=login_user).first()
+        if user:
+            if not user or not check_password_hash(user.password, login_pass):
+                flask.flash(
+                    "This username and password combination is incorrect. Please try again."
+                )
+                # if the above check passes, then we know the user has the right credentials
+                login_user(user, remember=True)
+                return flask.redirect(flask.url_for("homepage"))
+
+        password = generate_password_hash(login_pass)
+        login_info = student_users(username=login_user, password=password, student_emaill=email)
+        db.session.add(login_info)
         db.session.commit()
-        previousUser = False
-
-    # Begin user session by logging the user in
-    login_user(student_users.query.filter_by(student_email=users_email).first())
-
-    # if user already exists, send straight to their home page
-    if previousUser:
-        # check if user finished onboarding
-        if current_user.name == None:
-            return flask.redirect(flask.url_for("onboarding"))
-        # if merchant user, send to merchant homepage
-        # otherwise, regular
-        else:
-            return flask.redirect(flask.url_for("homepage"))
-
-    # if not, send to onboarding
-    return flask.redirect(flask.url_for("onboarding"))
+        return flask.redirect(flask.url_for("/onboarding"))
+    if flask.request.method=="GET":
+        return flask.render_template("./index.html")
 
 
-@app.route("/loginTeacher", methods=["POST"])
-def loginTeacher_post():
-    return google.authorize(callback=flask.url_for("authorizedTeacher", _external=True))
-
-
-@app.route("/loginTeacher/authorized")
+@app.route("/loginTeacher")
 def authorizedTeacher():
-    resp = google.authorized_response()
-    if resp is None:
-        return "Access denied: reason=%s error=%s" % (
-            flask.request.args["error_reason"],
-            flask.request.args["error_description"],
-        )
-    flask.session["google_token"] = (resp["access_token"], "")
-    me = google.get("userinfo")
-    if me.data["verified_email"]:
-        users_email = me.data["email"]
-    else:
-        return "User email not available or not verified by Google.", 400
-    # Create a user in our database with the information provided by the Google response json
-    newUser = teacher_users(teacher_email=users_email)
+    if flask.request.method == "POST":
+        login_user = flask.request.form.get("login_user")
+        login_pass = flask.request.form.get("login_pass")
+        email = flask.request.form.get("email")
 
-    # Doesn't exist? Add it to the database.
-    previousUser = True
-    if not teacher_users.query.filter_by(teacher_email=users_email).first():
-        db.session.add(newUser)
+        user = teacher_users.query.filter_by(username=login_user).first()
+        if user:
+            if not user or not check_password_hash(user.password, login_pass):
+                flask.flash(
+                    "This username and password combination is incorrect. Please try again."
+                )
+                # if the above check passes, then we know the user has the right credentials
+                login_user(user, remember=True)
+                return flask.redirect(flask.url_for("homepage"))
+
+        password = generate_password_hash(login_pass)
+        login_info = teacher_users(username=login_user, password=password, teacher_emaill=email)
+        db.session.add(login_info)
         db.session.commit()
-        previousUser = False
 
-    # Begin user session by logging the user in
-    login_user(teacher_users.query.filter_by(teacher_email=users_email).first())
-
-    # if user already exists, send straight to their home page
-    if previousUser:
-        # check if user finished onboarding
-        if current_user.name == None:
-            return flask.redirect(flask.url_for("onboarding"))
-        # if merchant user, send to merchant homepage
-        # otherwise, regular
-        else:
-            return flask.redirect(flask.url_for("module"))
-
-    # if not, send to onboarding
     return flask.redirect(flask.url_for("onboarding"))
 
 
-@app.route("/loginParent", methods=["POST"])
-def loginParent_post():
-    print("hello darkness")
-    return google.authorize(callback=flask.url_for("authorizedParent", _external=True))
-
-
-@app.route("/loginParent/authorized")
+@app.route("/loginParent")
 def authorizedParent():
-    resp = google.authorized_response()
-    if resp is None:
-        return "Access denied: reason=%s error=%s" % (
-            flask.request.args["error_reason"],
-            flask.request.args["error_description"],
-        )
-    flask.session["google_token"] = (resp["access_token"], "")
-    me = google.get("userinfo")
-    if me.data["verified_email"]:
-        users_email = me.data["email"]
-    else:
-        return "User email not available or not verified by Google.", 400
-    # Create a user in our database with the information provided by the Google response json
-    newUser = parent_users(parent_email=users_email)
+    if flask.request.method == "POST":
+        login_user = flask.request.form.get("login_user")
+        login_pass = flask.request.form.get("login_pass")
+        email = flask.request.form.get("email")
 
-    # Doesn't exist? Add it to the database.
-    previousUser = True
-    if not parent_users.query.filter_by(parent_email=users_email).first():
-        db.session.add(newUser)
+        user = parent_users.query.filter_by(username=login_user).first()
+        if user:
+            if not user or not check_password_hash(user.password, login_pass):
+                flask.flash(
+                    "This username and password combination is incorrect. Please try again."
+                )
+                # if the above check passes, then we know the user has the right credentials
+                login_user(user, remember=True)
+                return flask.redirect(flask.url_for("homepage"))
+
+        password = generate_password_hash(login_pass)
+        login_info = parent_users(username=login_user, password=password, parent_emaill=email)
+        db.session.add(login_info)
         db.session.commit()
-        previousUser = False
 
-    # Begin user session by logging the user in
-    login_user(parent_users.query.filter_by(parent_email=users_email).first())
-
-    # if user already exists, send straight to their home page
-    if previousUser:
-        # check if user finished onboarding
-        if current_user.name == None:
-            return flask.redirect(flask.url_for("onboarding"))
-        # if merchant user, send to merchant homepage
-        # otherwise, regular
-        else:
-            return flask.redirect(flask.url_for("homepage"))
-
-    # if not, send to onboarding
     return flask.redirect(flask.url_for("onboarding"))
 
 
@@ -326,8 +407,20 @@ def createAccountParent():
 def homepage():
     return flask.render_template("./index.html")
 
-@app.route("/module_1")
-def module1page():
+@app.route("/module1_pg1")
+def module1page1():
+    return flask.render_template("./index.html")
+
+@app.route("/module1_pg2")
+def module1page2():
+    return flask.render_template("./index.html")
+
+@app.route("/module1_pg3")
+def module1page3():
+    return flask.render_template("./index.html")
+
+@app.route("/module1_pg4")
+def module1page4():
     return flask.render_template("./index.html")
 
 @app.route("/module2-page1")
@@ -352,6 +445,54 @@ def module2dog():
 
 @app.route("/module2-plane")
 def module2plane():
+    return flask.render_template("./index.html")
+
+@app.route("/module2-birdidentification")
+def module2birdid():
+    return flask.render_template("./index.html")
+
+@app.route("/module2-catidentification")
+def module2catid():
+    return flask.render_template("./index.html")
+
+@app.route("/module2-dogidentification")
+def module2dogid():
+    return flask.render_template("./index.html")
+
+@app.route("/module2-planeidentification")
+def module2planeid():
+    return flask.render_template("./index.html")
+
+@app.route("/module2-catlayers")
+def module2catlayers():
+    return flask.render_template("./index.html")
+
+@app.route("/module2-birdlayers")
+def module2birdlayers():
+    return flask.render_template("./index.html")
+
+@app.route("/module2-doglayers")
+def module2doglayers():
+    return flask.render_template("./index.html")
+
+@app.route("/module2-planelayers")
+def module2planelayers():
+    return flask.render_template("./index.html")
+
+@app.route("/module2-catregions")
+def module2catregions():
+    return flask.render_template("./index.html")
+
+@app.route("/module2-birdregions")
+def module2birdregions():
+    return flask.render_template("./index.html")
+
+@app.route("/module2-dogregions")
+def module2dogregions():
+    return flask.render_template("./index.html")
+
+@app.route("/module2-planeregions")
+def module2planeregions():
     return flask.render_template("./index.html")
 
 @app.route("/mod1quiz")

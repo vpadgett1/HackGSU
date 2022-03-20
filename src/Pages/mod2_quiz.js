@@ -82,13 +82,42 @@ export default function App() {
             .catch((response) => console.log(response));
     }
 
+    function movePage(){
+        return window.location.href='/homepage';
+      }
+
+    function sendScoreData(){
+        const email = document.getElementById('email').value;
+        fetch(`/mailer?score=${score}&num_of_questions=${questions.length}&email=${email}`, {
+            method: 'POST',
+          })
+            .then((response) => response.json())
+            .then((result) => {
+              console.log("Email sent!")
+            })
+            .catch((response) => console.log(response));
+    }
+
 	return (
 		<div className='app'>
 			{showScore ? (
                 transferScoretoDB(),
-				<div className='score-section'>
-					You scored {score} out of {questions.length}
-				</div>
+				<div>
+                    <div className='score-section'>
+                        You scored {score} out of {questions.length}
+                    </div>
+                    <div>
+                        <button type="submit" onClick={movePage}>Click Here To Return To Homepage</button>
+                    </div>
+                    <div>
+                        <form>
+                            Send Yourself Your Score Reports By Entering Your Email Below:
+                            <input type="text" placeholder="email" id="email" maxLength={50} />
+                            <br />
+                            <button type="button" onClick={sendScoreData} className="continueButton">Send Email</button>
+                        </form>
+                    </div>
+                </div>
 			) : (
 				<>
 					<div className='question-section'>

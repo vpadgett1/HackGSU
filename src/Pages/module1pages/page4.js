@@ -3,7 +3,9 @@ import autonomous from '../../mod1images/autonomous.jpg';
 import roomba from '../../mod1images/roomba.jpg';
 import diagnosis from '../../mod1images/diag.jpg';
 function Module1Page4 () {
-
+  function movePage(){
+    return window.location.href='/mod1quiz';
+  }
   return (
     <div>
       <div>
@@ -23,6 +25,8 @@ function Module1Page4 () {
       <div class='image'><img src={autonomous}/></div>
       <div class='image'><img src={roomba}/></div>
       <div class='image'><img src={diagnosis}/></div>
+      <br/>
+      <button type="submit" onClick={movePage}>Click Here to Take The End of Module Assessment</button>
     </div>
   );
 }
