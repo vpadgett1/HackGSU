@@ -29,7 +29,6 @@ ReactDOM.render(
   <React.StrictMode>
 
     <Router>
-
         <Navigation />
       <Routes>
         <Route exact path="/" element={<LandingPage />} />
