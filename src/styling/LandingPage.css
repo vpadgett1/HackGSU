@@ -6,7 +6,8 @@
 }
 
 .whoWeAre{
-    background: linear-gradient(180deg,#a621df,#450461);
+    //background: linear-gradient(,#a621df,#450461);
+    background-image: linear-gradient(180deg, rgba(255,0,0,0), rgb(85, 176, 218));
     padding: 50px;
     border-top-left-radius: 50px;
     border-top-right-radius: 50px;
