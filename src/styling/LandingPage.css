@@ -1,0 +1,32 @@
+.bg-navbar{
+    background-color: #9400D3;
+}
+.landingPageInfo{
+    background-color:#f3e1df;
+}
+
+.whoWeAre{
+    background: linear-gradient(180deg,#a621df,#450461);
+    padding: 50px;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    text-align: center;
+}
+.functionalityCard {
+    width: 90%;
+    background-color: #fff;
+    padding: 50px;
+    border-radius: 50px;
+    margin: 50px  50px;
+    box-shadow: 0 8px 10px grey;
+}
+.whoWeAreTitle{
+    color: white;
+}
+.creatorPictures{
+    width: 60%;
+    height:60%;
+    margin-left: 20%;
+    margin-top: 10%;
+    /* left: 20px; */
+}
