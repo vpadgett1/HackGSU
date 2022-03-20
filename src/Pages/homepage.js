@@ -1,7 +1,9 @@
 import '../App.css';
-import '../styling/LandingPage.css';
+//import '../styling/LandingPage.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Navbar, Container, Nav, Card, Button, CardGroup} from 'react-bootstrap'
+import ai_image from '../images/ai_hackgsu.jpg';
+import brain from '../images/brain.jpg';
 import React, {
 } from 'react';
 
@@ -10,7 +12,7 @@ const HomePage = () => (
         <div className="HomepagePageInfo">
             <div className = "cardgroup">
                     <Card border="secondary" style={{ width: '18rem' }}>
-                        <Card.Img variant="top" src="./images/ai_hackgsu.jpg" />
+                        <Card.Img variant="top" src={ai_image} style={{width: '18em', height: '15em'}} />
                         <Card.Body> 
                             <Card.Header>Module #1</Card.Header>
                             <Card.Title>What is Artifical Intellegence?</Card.Title>
@@ -22,7 +24,7 @@ const HomePage = () => (
                     </Card>
 
                     <Card border="secondary" style={{ width: '18rem' }}>
-                        <Card.Img variant="top" src="./images/ai_hackgsu.jpg" />
+                        <Card.Img variant="top" src={brain} style={{width: '18em', height: '15em'}} />
                         <Card.Body> 
                             <Card.Header>Module #2</Card.Header>
                             <Card.Title>Let's See a Visual Example</Card.Title>
