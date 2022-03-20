@@ -20,3 +20,13 @@
     margin: 50px  50px;
     box-shadow: 0 8px 10px grey;
 }
+.whoWeAreTitle{
+    color: white;
+}
+.creatorPictures{
+    width: 60%;
+    height:60%;
+    margin-left: 20%;
+    margin-top: 10%;
+    /* left: 20px; */
+}
