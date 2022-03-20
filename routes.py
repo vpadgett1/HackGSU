@@ -564,6 +564,8 @@ def updateScore2():
     }
 
 
+
+
 # send manifest.json file
 @app.route("/manifest.json")
 def manifest():

@@ -56,8 +56,8 @@ function Navigation() {
           </Nav>
         </Container>
       </Navbar>
-            <ImageSwapper />
-            <UploadFile />
+
+            {/*<UploadFile />*/}
         </>
     );}
 export default Navigation;
