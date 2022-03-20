@@ -13,7 +13,7 @@ export default function ImageSwapper() {
 
     useEffect(() => {
         const intervalId = setInterval(() => {
-            setCurrentImage(images[Math.floor(Math.random() * items.length)]);
+            setCurrentImage(images[Math.floor(Math.random() * images.length)]);
         }, 5000)
 
         return () => clearInterval(intervalId);
