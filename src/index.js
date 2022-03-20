@@ -10,10 +10,15 @@ import {
 } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import LandingPage from './Pages/landing';
+//import CreateAccountPage from './Pages/CreateAccountPage';
+import Module2Page1 from './Pages/module2pages/page1';
+import Module2Page2 from './Pages/module2pages/page2';
+import Module2bird from './Pages/module2pages/bird';
 import OnboardingPage from './Pages/onboarding';
 import HomePage from './Pages/homepage';
 import Navigation from './Components/Navigation';
 import './index.css';
+
 
 ReactDOM.render(
   <React.StrictMode>
@@ -23,6 +28,9 @@ ReactDOM.render(
         <Route exact path="/" element={<LandingPage />} />
         <Route path="/onboarding" element={<OnboardingPage />} />
         <Route path="/homepage" element={<HomePage />} />
+        <Route exact path="/module2-page1" element={<Module2Page1 />} />
+        <Route exact path="/module2-page2" element={<Module2Page2 />} />
+        <Route exact path="/module2-bird" element={<Module2bird />} />
       </Routes>
     </Router>
   </React.StrictMode>,
