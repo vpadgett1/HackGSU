@@ -21,6 +21,8 @@ ReactDOM.render(
         <Route exact path="/" element={<LandingPage />} />
         {/* <Route path="/createAccount" element={<CreateAccountPage />} /> */}
         <Route path="/onboarding" element={<OnboardingPage />} />
+
+
       </Routes>
     </Router>
   </React.StrictMode>,
