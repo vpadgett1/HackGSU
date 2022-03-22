@@ -2,7 +2,10 @@ Flask
 python-dotenv
 requests
 flask_sqlalchemy
+flask_oauthlib
 flask_login
-psycopg2-binary
+psycopg2
 twilio
 Flask-OAuthLib
+werkzeug
+psycopg2-binary
